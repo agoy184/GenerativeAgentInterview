@@ -1,0 +1,7 @@
+
+class Dialog {
+
+    update() {
+
+    }
+}
