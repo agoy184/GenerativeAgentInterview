@@ -1,8 +1,14 @@
 //How to use OpenAI with JS
 //https://rollbar.com/blog/chatgpt-api-with-javascript/
 
+require('dotenv').config();
+const apiKey = process.env.OPENAI_API_KEY
+console.log(apiKey)
+
 const { Configuration, OpenAIApi } = require("openai");
-require('dotenv').config()
+
+console.log("Configuration:", Configuration);
+console.log("OpenAIApi:", OpenAIApi);
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
