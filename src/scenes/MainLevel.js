@@ -33,9 +33,9 @@ class MainLevel extends Phaser.Scene{
     relevance(In,mem){
         // In is the player input string and mem is core memory
         
-        //
+        //prompt GBT "on a scale of 1 to 100 rate the relevancy of these two statements  playerinput memory"
 
-
+        
         
         // return x amount of relevant mem
     }
@@ -44,14 +44,36 @@ class MainLevel extends Phaser.Scene{
     create() {
         //CoreMemory= //PQ
         //this.callChatGBT("Give me recipes for cheese!")
-        const response = this.callChatGBT("Give me recipes for cheese!");
-        console.log(response)
+        //const response = this.callChatGBT("Give me recipes for cheese!");
+        //console.log(response)
+
+        // get player input string 
+        this.add.text(10, 10, 'Enter your question:', { font: '32px Courier', fill: '#ffffff' });
+
+        const textEntry = this.add.text(10, 50, '', { font: '32px Courier', fill: '#ffff00' });
+
+        this.input.keyboard.on('keydown', event =>
+        {
+
+            if (event.keyCode === 13){
+                const response = this.callChatGBT(textEntry.text)
+                console.log(response)
+                textEntry.text = ""
+            }
+            else if (event.keyCode === 8 && textEntry.text.length > 0)
+            {
+                textEntry.text = textEntry.text.substr(0, textEntry.text.length - 1);
+            }
+            else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode < 90))
+            {
+                textEntry.text += event.key;
+            }
+
+        });
     }
 
     update() {
 
-
-        // get player input string 
         //PlayerInput = string
 
         //find relevant of memories  probably top 10? 
