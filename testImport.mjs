@@ -16,8 +16,11 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY // This is also the default, can be omitted
 });
 
+const question = "";
+
 const chatCompletion = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
-    messages: [{"role": "user", "content": "What is 9 plus 10?"}],
+    messages: [{"role": "user", "content": question}],
 });
 console.log(chatCompletion.choices[0].message);
+console.log(chatCompletion.data.choices[0].message[content]);
