@@ -33,9 +33,7 @@ class MainLevel extends Phaser.Scene{
     relevance(In,mem){
         // In is the player input string and mem is core memory
         
-
         //prompt GBT "on a scale of 1 to 100 rate the relevancy of these two statements  playerinput memory"
-        
         
         // return x amount of relevant mem
     }
@@ -57,6 +55,9 @@ class MainLevel extends Phaser.Scene{
         {
 
             if (event.keyCode === 13){
+                playerInputtedString(textEntry.text)
+
+                // DEBUG no edits to CHAT GBT INPUT
                 const response = this.callChatGBT(textEntry.text)
                 console.log(response)
                 textEntry.text = ""
@@ -65,7 +66,7 @@ class MainLevel extends Phaser.Scene{
             {
                 textEntry.text = textEntry.text.substr(0, textEntry.text.length - 1);
             }
-            else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode < 90))
+            else if (event.keyCode === 32 || event.keyCode === 190 || event.keyCode === 191 || (event.keyCode >= 48 && event.keyCode < 90))
             {
                 textEntry.text += event.key;
             }
@@ -73,7 +74,7 @@ class MainLevel extends Phaser.Scene{
         });
     }
 
-    update() {
+    playerInputtedString(inputString) {
 
         //PlayerInput = string (Jonah)
 
@@ -82,9 +83,11 @@ class MainLevel extends Phaser.Scene{
         // https://www.geeksforgeeks.org/implementation-priority-queue-javascript/
 
 
-        //find relevant of memories  probably top 10? (Michael) 
+        //find relevant of memories probably top 10? (Michael) 
         //RelMem=this.relevance(PlayerInput,CoreMemory) 
 
+        // Pose question to AI in correct form
+        
 
         // After relevant memories and Important memories are (Jonah)
         // found feed into GBT to get ai response 
