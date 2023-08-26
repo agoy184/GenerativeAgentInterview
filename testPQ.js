@@ -203,6 +203,9 @@ for (let i = 0; i < questionToAsk.length; i++) {
         var importancePriorityNumber = parseInt(importancePriority);
         pQ.enqueue(newMemory, importancePriorityNumber);
     }
+    else{
+        console.log("ERROR: CHATGPT No Longer Prompts the same way")
+    }
 }
 
 console.log(pQ.items);
