@@ -139,12 +139,17 @@ class MainLevel extends Phaser.Scene{
         });
     }
 
-    async playerInputtedString(inputString) {
+    
+
+    async update() {
+
+        //PlayerInput = string (Jonah) 
 
         //Memory Stream 
-        // Priority Queue (Dylan)
-        // https://www.geeksforgeeks.org/implementation-priority-queue-javascript/
-
+        // Priority Queue (Dylan) 
+        // https://www.geeksforgeeks.org/implementation-priority-queue-javascript/ 
+        
+        
 
         //find relevant of memories probably top 10? (Michael) 
 
@@ -220,4 +225,31 @@ class MainLevel extends Phaser.Scene{
     }
 
 
+}
+
+// User defined class
+// to store element and its priority
+class QElement {
+    constructor(element, priority)
+    {
+        this.element = element;
+        this.priority = priority;
+    }
+}
+
+// PriorityQueue class
+class PriorityQueue {
+
+    // An array is used to implement priority
+    constructor()
+    {
+        this.items = [];
+    }
+
+    // functions to be implemented
+    // enqueue(item, priority)
+    // dequeue()
+    // front()
+    // isEmpty()
+    // printPQueue()
 }
