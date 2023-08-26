@@ -30,7 +30,7 @@ class MainLevel extends Phaser.Scene{
         return data.choices[0].message.content;
     }
 
-    relevance(In,mem){
+    async relevance(In,mem){
         // In is the player input string and mem is core memory
 
         // dicionary for sorting top memories 
@@ -49,7 +49,8 @@ class MainLevel extends Phaser.Scene{
 
             // put text through GBT
             // if function is updated with memory then hopefully we should be able to leave it empty
-            let response = this.callChatGBT(text)
+            let response = await this.callChatGBT(text)
+            
 
             console.log(response)
 
@@ -92,7 +93,6 @@ class MainLevel extends Phaser.Scene{
 
             }
 
-            break
 
         }
 
@@ -100,6 +100,7 @@ class MainLevel extends Phaser.Scene{
 
         // return x amount of relevant mem
 
+        console.log(Object.keys(dic))
         return Object.keys(dic)
         
     }
@@ -138,7 +139,7 @@ class MainLevel extends Phaser.Scene{
         });
     }
 
-    playerInputtedString(inputString) {
+    async playerInputtedString(inputString) {
 
         //Memory Stream 
         // Priority Queue (Dylan)
@@ -168,10 +169,6 @@ class MainLevel extends Phaser.Scene{
         }
 
 
-        let RelMem=this.relevance(PlayerInput,CoreMemory) 
-
-        console.log(RelMem)
-
 
         // Pose question to AI in correct form
         
@@ -186,15 +183,7 @@ class MainLevel extends Phaser.Scene{
 
         // Editable Variables
         // Test Case
-        const relevant_memories = ["Steve is a olympic gold metalist",
-                                    "Steve hates chickens",
-                                    "Steve remembers seeing Stacy at the grocery store",
-                                    "Steve's mom says he is not qualified for the job",
-                                    "Jim is a cook",
-                                    "Steve hates rainbows",
-                                    "Steve is skilled with Excel and Google Docs",
-                                    "Steve likes writing poems",
-                                    "Steve burned his mom's house down in 2006."]
+        const relevant_memories = await this.relevance(PlayerInput,CoreMemory) 
         const npc_name = "Steve"
         const player_name = "Jonah"
         
@@ -204,8 +193,14 @@ class MainLevel extends Phaser.Scene{
             Observation: ${player_name} is asking another question in the interview.\n\
             Summary of relevant context from ${npc_name}'s memory:\n`
         
+        
+        console.log(typeof  relevant_memories)
         // Add all relevant memories
-        relevant_memories.forEach((element) => input_prompt += (element + "\n"))
+        for(const element of relevant_memories){
+            input_prompt += (element + "\n")
+
+        }
+        //relevant_memories.forEach((element) => input_prompt += (element + "\n"))
 
         // Pose question
         input_prompt += `${player_name}: ${inputString}\nHow would ${npc_name} respond to ${player_name}?\n`
