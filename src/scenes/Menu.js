@@ -5,8 +5,8 @@ class Menu extends Phaser.Scene{
 
     create() {
         let menuConfig = {
-            fontFamily: 'Fantasy',
-            fontSize: '35px',
+            fontFamily: 'font1',
+            fontSize: '48px',
             backgroundColor: '#303030',
             color: '#FFFFFF',
             align: 'right',
@@ -17,8 +17,8 @@ class Menu extends Phaser.Scene{
             fixedWidth: 0
         }
         let smallConfig = {
-            fontFamily: 'Fantasy',
-            fontSize: '27px',
+            fontFamily: 'font1',
+            fontSize: '24px',
             backgroundColor: '#303030',
             color: '#FFFFFF',
             align: 'left',
