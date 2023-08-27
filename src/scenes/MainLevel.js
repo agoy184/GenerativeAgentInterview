@@ -41,11 +41,12 @@ class MainLevel extends Phaser.Scene{
         // depends on how memory is implemented 
         // just need to iterate through mem to get strings and then importance value    
 
-        let len = mem.items.length 
+        console.log(mem.element)
+        let len = mem.length 
 
         for( let i = 0; i < len; i++ ){
 
-            let key=mem[i].element 
+            let key=mem[i].element;
 
             //In should be player input and key is the memory 
             let text= "on a scale of 1 to 100 rate how connected these two phrases are with only a number: "+In+"and, "+ key
@@ -127,8 +128,8 @@ class MainLevel extends Phaser.Scene{
             "following piece of memory. " +
             `Memory: ${memory}` +
             "and Pharmacy" +
-            "Only say a number.";
-        var response = await callChatGBT(prompt);
+            "Only respond with one whole number from 1 to 100.";
+        var response = await this.callChatGBT(prompt);
         console.log(response);
         return response;
     }
@@ -207,7 +208,7 @@ class MainLevel extends Phaser.Scene{
 
         // Editable Variables
         // Test Case
-        const relevant_memories = await this.relevance(inputString,this.pQ) 
+        const relevant_memories = await this.relevance(inputString,this.pQ.qItems()) 
         const npc_name = "Steve"
         const player_name = "Jonah"
         
@@ -246,6 +247,7 @@ class MainLevel extends Phaser.Scene{
             this.pQ.enqueue(newMemory, importancePriorityNumber);
         }
         else{
+            console.log(importancePriority);
             console.log("ERROR: CHATGPT No Longer Prompts the same way");
             throw new Error("ERROR: CHATGPT No Longer Prompts the same way");
         }
@@ -260,6 +262,7 @@ class MainLevel extends Phaser.Scene{
             this.pQ.enqueue(newMemory, importancePriorityNumber);
         }
         else{
+            console.log(importancePriority);
             console.log("ERROR: CHATGPT No Longer Prompts the same way");
             throw new Error("ERROR: CHATGPT No Longer Prompts the same way");
         }
@@ -281,6 +284,14 @@ class QElement {
         this.element = element;
         this.priority = priority;
     }
+
+    qElement() {
+        return this.element;
+    }
+
+    qPriority() {
+        return this.priority;
+    }
 }
 
 // PriorityQueue class
@@ -293,8 +304,7 @@ class PriorityQueue {
 
     // enqueue function to add element
     // to the queue as per priority
-    enqueue(element, priority)
-    {
+    enqueue(element, priority) {
         // creating object from queue element
         var qElement = new QElement(element, priority);
         var contain = false;
@@ -364,7 +374,7 @@ class PriorityQueue {
         return str;
     }
     
-    items() {
+    qItems() {
         return this.items;
     }
 
