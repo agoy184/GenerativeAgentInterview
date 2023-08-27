@@ -189,7 +189,10 @@ class MainLevel extends Phaser.Scene{
 
     }
 
-    
+    //check if string is an integer from chatGPT
+    isInteger(str) {
+        return !isNaN(parseInt(str)) && Number.isInteger(parseFloat(str));
+    }
 
     async playerInputtedString(inputString) {
         
