@@ -140,7 +140,20 @@ class MainLevel extends Phaser.Scene{
     }
 
     create() {
-        //CoreMemory= //PQ
+        
+        this.anims.create({
+            key: 'load',
+            frames: this.anims.generateFrameNames('loadingDots', {
+                prefix: 'loading (',
+                start: 1,
+                end: 3,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+
+        this.loadingAnim = this.add.sprite(10,100,'loadingDots').setOrigin(0,0).setScale(0.5);
 
         this.npcNames = ["Jake","Clinton","Linda"]
         this.currentNPC = 0
@@ -221,7 +234,7 @@ class MainLevel extends Phaser.Scene{
         const monospacedFont = 'Monaco';
         this.textResponse = this.add.text(10, 200, '', { fontFamily: monospacedFont, fontSize: '16px', fill: '#ffffff' });
 
-        this.input.keyboard.on('keydown', event =>
+        this.input.keyboard.on('keydown', async event =>
         {
 
             if(event.keyCode === 38){
@@ -233,7 +246,7 @@ class MainLevel extends Phaser.Scene{
             }
 
             if (textEntry.text.substr(textEntry.text.length - 1,textEntry.text.length) === "?" &&  event.keyCode === 13){
-                this.playerInputtedString(textEntry.text)
+                await this.run(textEntry.text)
 
                 textEntry.text = ""
             }
@@ -251,6 +264,18 @@ class MainLevel extends Phaser.Scene{
 
 
 
+    }
+
+    //aycn + await management from chat gpt
+    async run(inputString) {
+        const asyncPromise = this.playerInputtedString(inputString);
+        
+        // Run something concurrently with the async function
+        this.loadingAnim.anims.play('load');
+        
+        await asyncPromise;
+        
+        this.loadingAnim.anims.stop('load');
     }
 
     async playerInputtedString(inputString) {
