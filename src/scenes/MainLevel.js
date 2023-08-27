@@ -92,10 +92,7 @@ class MainLevel extends Phaser.Scene{
                 dic[key]=retrieval
 
             }
-
-
         }
-
         //array of top 10 memories
 
         // return x amount of relevant mem
@@ -141,7 +138,7 @@ class MainLevel extends Phaser.Scene{
 
     
 
-    async update() {
+    async playerInputtedString(inputString) {
 
         //PlayerInput = string (Jonah) 
 
