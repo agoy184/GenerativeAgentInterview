@@ -104,6 +104,8 @@ class MainLevel extends Phaser.Scene{
 
 
     create() {
+        keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+
         //CoreMemory= //PQ
 
         //this.callChatGBT("Give me recipes for cheese!")
@@ -134,9 +136,16 @@ class MainLevel extends Phaser.Scene{
             }
 
         });
+
     }
 
-    
+    update() {
+
+        if (Phaser.Input.Keyboard.JustDown(keyENTER)) {
+            console.log("Initiating response")
+            this.add.text(10, 100, 'Response:', { fontFamily: 'header', fontSize: '36px', fill: '#ffffff' });
+        }
+    }
 
     async playerInputtedString(inputString) {
 
@@ -209,7 +218,7 @@ class MainLevel extends Phaser.Scene{
         input_prompt += `Please respond as if you were ${npc_name}. Be brief in response, under 4 sentences.\n\
             Use casual language and don't be too descriptive. Be confident but a little arrogant.`
 
-        const response_from_NPC = this.callChatGBT(input_prompt)
+        var response_from_NPC = this.callChatGBT(input_prompt)
     
         // For debugging
         console.log(response_from_NPC)
