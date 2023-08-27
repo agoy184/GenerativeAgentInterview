@@ -139,13 +139,6 @@ class MainLevel extends Phaser.Scene{
 
     }
 
-    update() {
-
-        if (Phaser.Input.Keyboard.JustDown(keyENTER)) {
-            console.log("Initiating response")
-            this.add.text(10, 100, 'Response:', { fontFamily: 'header', fontSize: '36px', fill: '#ffffff' });
-        }
-    }
 
     async playerInputtedString(inputString) {
 
@@ -226,8 +219,11 @@ class MainLevel extends Phaser.Scene{
         //PlayerInput is then added into CoreMemory () (Dylan)
 
         //Have the ai write out Response (Abel)
+        //if (Phaser.Input.Keyboard.JustDown(keyENTER)) {
+        console.log("Initiating response")
+        this.add.text(10, 100, 'Response:', { fontFamily: 'header',fontSize: '36px', fill: '#ffffff' });
+        this.add.text(10, 200, response_from_NPC, { fontFamily: 'header', fontSize: '36px', fill: '#ffffff' });
     }
-
 
 }
 
