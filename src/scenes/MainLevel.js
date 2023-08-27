@@ -306,7 +306,9 @@ class MainLevel extends Phaser.Scene{
         // }
         const parts = ff.split(".");
         ff = ff.split("!");
-        this.textResponse.setText(parts);
+
+        var textContent = this.textResponse.text
+        this.textResponse.setText(parts + '\n' + textContent);
 
     }
 
