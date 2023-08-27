@@ -134,6 +134,11 @@ class MainLevel extends Phaser.Scene{
         return response;
     }
 
+    //check if string is an integer from chatGPT
+    isInteger(str) {
+        return !isNaN(parseInt(str)) && Number.isInteger(parseFloat(str));
+    }
+
     create() {
         var maxTextLength = 22;
 
@@ -169,6 +174,8 @@ class MainLevel extends Phaser.Scene{
 
         const textEntry = this.add.text(10, 50, '', { fontFamily: 'type', fontSize: '36px',  fill: '#ffff00' });
 
+        this.textResponse = this.add.text(10, 200, 'Response:', { fontFamily: 'header', fontSize: '12px', fill: '#ffffff' });
+
         this.input.keyboard.on('keydown', event =>
         {
 
@@ -189,11 +196,6 @@ class MainLevel extends Phaser.Scene{
 
         });
 
-    }
-
-    //check if string is an integer from chatGPT
-    isInteger(str) {
-        return !isNaN(parseInt(str)) && Number.isInteger(parseFloat(str));
     }
 
     async playerInputtedString(inputString) {
@@ -291,7 +293,7 @@ class MainLevel extends Phaser.Scene{
         //Have the ai write out Response (Abel)
 
         console.log("Initiating response")
-        this.add.text(10, 100, 'Response:', { fontFamily: 'header',fontSize: '36px', fill: '#ffffff' });
+        // this.add.text(10, 100, 'Response:', { fontFamily: 'header',fontSize: '36px', fill: '#ffffff' });
         var x = 0
         var ff = String(response);
         //while (x == 0) {
@@ -305,7 +307,7 @@ class MainLevel extends Phaser.Scene{
         // }
         const parts = ff.split(".");
         ff = ff.split("!");
-        this.textResponse = this.add.text(10, 200, parts, { fontFamily: 'header', fontSize: '12px', fill: '#ffffff' });
+        this.textResponse.setText(parts);
 
     }
 
