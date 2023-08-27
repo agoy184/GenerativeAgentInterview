@@ -27,32 +27,39 @@ class MainLevel extends Phaser.Scene{
     
         const data = await response.json();
         //console.log(data.choices[0].message.content)
-        return data.choices[0].message.content;
+        return data.choices[0].message.content;     // ERROR: Cannot read properties of undefined
     }
 
     async relevance(In,mem){
         // In is the player input string and mem is core memory
 
-        // dicionary for sorting top memories 
+        // dicionary for sorting top memories
         let dic ={}
 
 
         // if mem is a dictornary where key is the string and the value is the inportance
         // depends on how memory is implemented 
         // just need to iterate through mem to get strings and then importance value    
-        for( let key in mem){
+
+        console.log(mem.element)
+        let len = mem.length 
+
+        for( let i = 0; i < len; i++ ){
+
+            let key=mem[i].element;
 
             //In should be player input and key is the memory 
-            let text= "on a scale of 1 to 10 rate the relevancy of these two statements only say a number. "+In+" "+key
+            let text= "on a scale of 1 to 100 rate how connected these two phrases are with only a number: "+In+"and, "+ key
 
-            console.log(text)
+
+            //console.log(text)
 
             // put text through GBT
             // if function is updated with memory then hopefully we should be able to leave it empty
             let response = await this.callChatGBT(text)
             
 
-            console.log(response)
+            //console.log(response)
 
             // get numbers from string
             let NumbersFromString=0
@@ -64,12 +71,12 @@ class MainLevel extends Phaser.Scene{
             let rel = NumbersFromString
 
             
-            console.log(rel)
+            //console.log(rel)
 
 
 
             // get to total retrieval. simple way by just adding them.
-            let retrieval = rel + mem[key]
+            let retrieval = rel + mem[i].prority 
 
             //if 10 elements in dict
             if (Object.keys(dic).length == 10){
@@ -102,18 +109,70 @@ class MainLevel extends Phaser.Scene{
         
     }
 
+    //Importance
+    //Prompts ChatGPT to rate the importance of a memory
+    //Prompt from here: https://arxiv.org/pdf/2304.03442.pdf
+    // On the scale of 1 to 10, where 1 is purely mundane
+    // (e.g., brushing teeth, making bed) and 10 is
+    // extremely poignant (e.g., a break up, college
+    // acceptance), rate the likely poignancy of the
+    // following piece of memory.
+    // Memory: buying groceries at The Willows Market
+    // and Pharmacy
+    // Rating: <fill in></fill>
+    async importance(memory) {
+        var prompt = "On the scale of 1 to 100, where 1 is purely mundane" +
+            "(e.g., brushing teeth, making bed) and 10 is" +
+            "extremely poignant (e.g., a break up, college" +
+            "acceptance), rate the likely poignancy of the" +
+            "following piece of memory. " +
+            `Memory: ${memory}` +
+            "and Pharmacy" +
+            "Only respond with one whole number from 1 to 100.";
+        var response = await this.callChatGBT(prompt);
+        console.log(response);
+        return response;
+    }
+
+    //check if string is an integer from chatGPT
+    isInteger(str) {
+        return !isNaN(parseInt(str)) && Number.isInteger(parseFloat(str));
+    }
 
     create() {
         //CoreMemory= //PQ
 
-        //this.callChatGBT("Give me recipes for cheese!")
-        const response = this.callChatGBT("Give me recipes for cheese!");
-        console.log(response)
+        this.CoreMemory= {
+            "Steve likes dogs":   4,
+            "Steve worked at the cat cafe": 4,
+            "Steve has a freight licence":  6,
+            "Steve is a olympic gold medalist":  9,
+            "Steve burned a few houses down":  2,
+            "Steve really likes megazord":  9,
+            "Steve cant drive":  3,
+            "Steve thinks hes super cool":  8,
+            "Steve was a major part of watergate":  6,
+            "Steve voted for himself in the last election":  8,
+            "Steve cant read":  5,
+            "Steve cant jump that good":  3,
+            "Steve eats cats":   5,
+        }
 
-        // get player input string 
+        // Create our Memory Stream
+        this.pQ = new PriorityQueue();
+        for (const key in this.CoreMemory) {
+            const value = this.CoreMemory[key];
+            console.log(`Key: ${key}, Value: ${value}`)
+
+            this.pQ.enqueue(key, value);
+        }
+
+        // Set up Input
         this.add.text(10, 10, 'Enter your question:', { fontFamily: 'header', fontSize: '36px', fill: '#ffffff' });
 
         const textEntry = this.add.text(10, 50, '', { fontFamily: 'type', fontSize: '36px',  fill: '#ffff00' });
+
+        this.textResponse = this.add.text(10, 200, 'Response:', { fontFamily: 'header', fontSize: '12px', fill: '#ffffff' });
 
         this.input.keyboard.on('keydown', event =>
         {
@@ -134,44 +193,14 @@ class MainLevel extends Phaser.Scene{
             }
 
         });
+
     }
 
-    
-
     async playerInputtedString(inputString) {
-
-        //PlayerInput = string (Jonah) 
-
-        //Memory Stream 
-        // Priority Queue (Dylan) 
-        // https://www.geeksforgeeks.org/implementation-priority-queue-javascript/ 
         
-        
-        
-
-        //find relevant of memories probably top 10? (Michael) 
-
-
-        let PlayerInput="do you eat cats?"
-
-        let CoreMemory= {
-            "Steve likes dogs":   4,
-            "Steve worked at the cat cafe": 3,
-            "Steve has a freight licence":  6,
-            "Steve is a olympic gold medalist":  9,
-            "Steve burned a few houses down":  2,
-            "Steve really likes megazord":  9,
-            "Steve cant drive":  3,
-            "Steve thinks hes super cool":  8,
-            "Steve was a major part of watergate":  6,
-            "Steve voted for himslef in the last election":  8,
-            "Steve cant read":  5,
-            "Steve cant jump that good":  1,
-            "Steve eats cats":   5,
-        }
-
         // Pose question to AI in correct form
-        
+        // var responseHeight = 150;
+
         /*
         (NPC)'s status: (NPC) is being interviewed by (PLAYER NAME) for a job at a very important company.
         Observation: (PLAYER NAME) is asking another question in the interview
@@ -183,7 +212,7 @@ class MainLevel extends Phaser.Scene{
 
         // Editable Variables
         // Test Case
-        const relevant_memories = await this.relevance(PlayerInput,CoreMemory) 
+        const relevant_memories = await this.relevance(inputString,this.pQ.qItems()) 
         const npc_name = "Steve"
         const player_name = "Jonah"
         
@@ -193,14 +222,10 @@ class MainLevel extends Phaser.Scene{
             Observation: ${player_name} is asking another question in the interview.\n\
             Summary of relevant context from ${npc_name}'s memory:\n`
         
-        
-        console.log(typeof  relevant_memories)
         // Add all relevant memories
         for(const element of relevant_memories){
             input_prompt += (element + "\n")
-
         }
-        //relevant_memories.forEach((element) => input_prompt += (element + "\n"))
 
         // Pose question
         input_prompt += `${player_name}: ${inputString}\nHow would ${npc_name} respond to ${player_name}?\n`
@@ -209,17 +234,85 @@ class MainLevel extends Phaser.Scene{
         input_prompt += `Please respond as if you were ${npc_name}. Be brief in response, under 4 sentences.\n\
             Use casual language and don't be too descriptive. Be confident but a little arrogant.`
 
-        const response_from_NPC = this.callChatGBT(input_prompt)
+        var response_from_NPC = await this.callChatGBT(input_prompt)
     
         // For debugging
         console.log(response_from_NPC)
         
-        //PlayerInput is then added into CoreMemory () (Dylan)
+        console.log("OLD MEMORY STREAM: " + this.pQ.items);
 
+        //Putting New Memories into Memory Stream/PQ
+        var question = inputString; //questionToAsk[i];
+        var newMemory = "You got asked the question: " + question;
+        var importancePriority = await this.importance(newMemory);
+        console.log(typeof importancePriority)
+        if (this.isInteger(importancePriority)) {
+            var importancePriorityNumber = parseInt(importancePriority);
+            this.pQ.enqueue(newMemory, importancePriorityNumber);
+        }
+        else{
+            var tryAgain = "I only wanted you to respond with one number from 1 to 100 rating the importance of the memory: \"" +
+            newMemory +
+            "\". Try again.";
+            while(!this.isInteger(importancePriority)){
+                console.log("Try Again");
+                console.log(importancePriority);
+                importancePriority = await this.importance(tryAgain);
+            }
+            this.pQ.enqueue(newMemory, importancePriorityNumber);
+            // console.log(importancePriority);
+            // console.log("ERROR: CHATGPT No Longer Prompts the same way");
+            // throw new Error("ERROR: CHATGPT No Longer Prompts the same way");
+        }
+
+        //Putting New Memories into Memory Stream/PQ
+        var response = response_from_NPC; //questionToAsk[i];
+        var newMemory = "You responded to the question: " + question + " With the response: " + response;
+        var importancePriority = await this.importance(newMemory);
+        console.log(typeof importancePriority)
+        if (this.isInteger(importancePriority)) {
+            var importancePriorityNumber = parseInt(importancePriority);
+            this.pQ.enqueue(newMemory, importancePriorityNumber);
+        }
+        else{
+            var tryAgain = "I only wanted you to respond with one number from 1 to 100 rating the importance of the memory: \"" +
+            newMemory +
+            "\". Try again.";
+            while(!this.isInteger(importancePriority)){
+                console.log("Try Again");
+                console.log(importancePriority);
+                importancePriority = await this.importance(tryAgain);
+            }
+            this.pQ.enqueue(newMemory, importancePriorityNumber);
+        }
+
+        console.log("UPDATED MEMORY STREAM: " + this.pQ.printPQueue());
+
+        console.log("Response: ", response_from_NPC)
         //Have the ai write out Response (Abel)
+
+        console.log("Initiating response")
+        // this.add.text(10, 100, 'Response:', { fontFamily: 'header',fontSize: '36px', fill: '#ffffff' });
+        var x = 0
+        var ff = String(response);
+        //while (x == 0) {
+        //    if(ff.length >= 15) {
+                console.log(ff.length);
+                console.log("long");
+        //       ff.insert(15, '\n');
+        //   } else {
+        //       x++;
+        //   }
+        // }
+        const parts = ff.split(".");
+        ff = ff.split("!");
+        this.textResponse.setText(parts);
+
     }
 
-
+    update() {
+        
+    }
 }
 
 // https://www.geeksforgeeks.org/implementation-priority-queue-javascript/ 
@@ -231,21 +324,27 @@ class QElement {
         this.element = element;
         this.priority = priority;
     }
+
+    qElement() {
+        return this.element;
+    }
+
+    qPriority() {
+        return this.priority;
+    }
 }
 
 // PriorityQueue class
 class PriorityQueue {
 
     // An array is used to implement priority
-    constructor()
-    {
+    constructor() {
         this.items = [];
     }
 
     // enqueue function to add element
     // to the queue as per priority
-    enqueue(element, priority)
-    {
+    enqueue(element, priority) {
         // creating object from queue element
         var qElement = new QElement(element, priority);
         var contain = false;
@@ -272,8 +371,7 @@ class PriorityQueue {
 
     // dequeue method to remove
     // element from the queue
-    dequeue()
-    {
+    dequeue() {
         // return the dequeued element
         // and remove it.
         // if the queue is empty
@@ -284,8 +382,7 @@ class PriorityQueue {
     }
 
     // front function
-    front()
-    {
+    front() {
         // returns the highest priority element
         // in the Priority queue without removing it.
         if (this.isEmpty())
@@ -294,8 +391,7 @@ class PriorityQueue {
     }
 
     // rear function
-    rear()
-    {
+    rear() {
         // returns the lowest priority
         // element of the queue
         if (this.isEmpty())
@@ -304,19 +400,24 @@ class PriorityQueue {
     }
 
     // isEmpty function
-    isEmpty()
-    {
+    isEmpty() {
         // return true if the queue is empty.
         return this.items.length == 0;
     }
 
     // printQueue function
     // prints all the element of the queue
-    printPQueue()
-    {
+    printPQueue() {
         var str = "";
         for (var i = 0; i < this.items.length; i++)
             str += this.items[i].element + " ";
         return str;
-    }   
+    }
+    
+    qItems() {
+        return this.items;
+    }
+
+    
 }
+

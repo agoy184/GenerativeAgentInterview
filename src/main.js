@@ -1,7 +1,7 @@
 let config = {
     type: Phaser.AUTO,
-    width: 640,
-    height: 480,
+    width: 896,
+    height: 640,
     backgroundColor: '#8C8C8C',
     pixelArt: true,
     autoCenter: true,
@@ -20,7 +20,7 @@ let config = {
 let game = new Phaser.Game(config);
 
 // Reserve keyboard vars
-let keySPACE;
+let keySPACE, keyENTER;
 let keyW, keyA, keyS, keyD, keyR
 
 // Set UI Sizes
