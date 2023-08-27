@@ -49,17 +49,17 @@ class MainLevel extends Phaser.Scene{
             let key=mem[i].element;
 
             //In should be player input and key is the memory 
-            let text= "on a scale of 1 to 100 rate how connected these two phrases are with only a number: "+In+"and, "+ key
+            let text= `on a scale of 1 to 100 rate how connected these two phrases are with only a number: "${In}" and "${key}"`
 
 
-            //console.log(text)
+            console.log(text)
 
             // put text through GBT
             // if function is updated with memory then hopefully we should be able to leave it empty
             let response = await this.callChatGBT(text)
             
 
-            //console.log(response)
+            console.log(response)
 
             // get numbers from string
             let NumbersFromString=0
@@ -142,29 +142,75 @@ class MainLevel extends Phaser.Scene{
     create() {
         //CoreMemory= //PQ
 
-        this.CoreMemory= {
-            "Steve likes dogs":   4,
-            "Steve worked at the cat cafe": 4,
-            "Steve has a freight licence":  6,
-            "Steve is a olympic gold medalist":  9,
-            "Steve burned a few houses down":  2,
-            "Steve really likes megazord":  9,
-            "Steve cant drive":  3,
-            "Steve thinks hes super cool":  8,
-            "Steve was a major part of watergate":  6,
-            "Steve voted for himself in the last election":  8,
-            "Steve cant read":  5,
-            "Steve cant jump that good":  3,
-            "Steve eats cats":   5,
+        this.npcNames = ["Jake","Clinton","Linda"]
+        this.currentNPC = 0
+
+        // PERSON 1, Jake a charitable guy, Olympic gold metalist, with a record of being fired 55 times and highway robbery
+
+        this.jake_CoreMemory = {
+            "Jake is a tiny bit arrogant and confident." : 100,
+            "Jake donated both of his kidneys.": 100,
+            "Jake is a Olympic gold medalist.": 80,
+            "Jake has been fired 55 times.": 80,
+            "Jake has stolen two cars in his lifetime but never caught.": 90,
+            "Jake's Dog is named Snuckles.": 40,
+            "Jake's Dog Snuckles is 5 years old.": 50,
+            "Jake's Dog Snuckles loves bagels.": 20,
+            "Jake can't drive.": 50,
+            "Jake can't jump that good and is sad about it.": 90,
+            "Jake doesn't like being asked questions about the olympics.": 60,
+            "Jake's mom thinks he isn't going to make it as a car thief.": 80
         }
 
-        // Create our Memory Stream
-        this.pQ = new PriorityQueue();
-        for (const key in this.CoreMemory) {
-            const value = this.CoreMemory[key];
-            console.log(`Key: ${key}, Value: ${value}`)
+        // PERSON 2, Clinton a former class president of his elementary school, and shy about his CEO position at Microsoft
 
-            this.pQ.enqueue(key, value);
+        this.clinton_CoreMemory = {
+            "Clinton is kind and shy" : 100,
+            "Clinton is a former class president of his elementary school.": 100,
+            "Clinton hates questions about his relationships." : 90,
+            "Clinton is shy about his CEO position at Microsoft.": 80,
+            "Clinton loves ice cream, but only in a dish.": 70,
+            "Clinton has no pets and is sad about it.": 40,
+            "Clinton saw Jake, the olympic gold medalist, at the store last week.": 50,
+            "Clinton woke up at 7:53 AM this morning.": 30,
+            "Jessica, Clinton's Wife, loves apple cider donuts.": 20,
+            "Clinton is shy about his favorite song, The Pokemon Theme.": 10,
+            "Clinton has organized many students in his elementary school.": 40
+        }
+
+        // PERSON 3, Linda a pencil collector and poet but also stole every pencil she owns
+        this.linda_CoreMemory = {
+            "Linda is nice but a bit weird": 100,
+            "Linda is a pencil collector with 576 pencils in her house": 80,
+            "Linda likes sleeping on Tuesdays": 70,
+            "Linda has stolen every pencil she owns, minus one which her dad gave her": 100,
+            "Linda is nervous people will find out about her pencil theft": 100,
+            "Linda has eaten nothing for lunch": 50,
+            "Linda lives in a small Suburb of Brooklyn": 40,
+            "Linda hates how many trees her neighbor has": 30,
+            "Linda likes eating cake donuts": 30,
+            "Linda likes eating hot dogs but not with ketchup": 40      
+        }
+
+
+        // Create our Memory Stream
+        this.jake_pQ = new PriorityQueue();
+        this.clinton_pQ = new PriorityQueue();
+        this.linda_pQ = new PriorityQueue();
+
+        for (const key in this.jake_CoreMemory) {
+            const value = this.jake_CoreMemory[key];
+            this.jake_pQ.enqueue(key, value);
+        }
+
+        for (const key in this.clinton_CoreMemory) {
+            const value = this.clinton_CoreMemory[key];
+            this.clinton_pQ.enqueue(key, value);
+        }
+
+        for (const key in this.linda_CoreMemory) {
+            const value = this.linda_CoreMemory[key];
+            this.linda_pQ.enqueue(key, value);
         }
 
         // Set up Input
@@ -177,6 +223,14 @@ class MainLevel extends Phaser.Scene{
 
         this.input.keyboard.on('keydown', event =>
         {
+
+            if(event.keyCode === 38){
+                this.currentNPC += 1
+                if(this.currentNPC>2){
+                    this.currentNPC = 0
+                }
+                console.log("New NPC is: "+ this.npcNames[this.currentNPC])
+            }
 
             if (textEntry.text.substr(textEntry.text.length - 1,textEntry.text.length) === "?" &&  event.keyCode === 13){
                 this.playerInputtedString(textEntry.text)
@@ -194,6 +248,8 @@ class MainLevel extends Phaser.Scene{
             }
 
         });
+
+
 
     }
 
@@ -213,9 +269,14 @@ class MainLevel extends Phaser.Scene{
 
         // Editable Variables
         // Test Case
-        const relevant_memories = await this.relevance(inputString,this.pQ.qItems()) 
-        const npc_name = "Steve"
-        const player_name = "Jonah"
+        let pQ = new PriorityQueue();
+        if(this.currentNPC == 0){ pQ = this.jake_pQ}
+        if(this.currentNPC == 1){ pQ = this.clinton_pQ}
+        if(this.currentNPC == 2){ pQ = this.linda_pQ}
+
+        const relevant_memories = await this.relevance(inputString,pQ.qItems()) 
+        const npc_name = this.npcNames[this.currentNPC]
+        const player_name = "Interviewer"
         
         // Base prompt, always same
         let input_prompt = `${npc_name}'s status: ${npc_name} is being interviewed by ${player_name}\
@@ -233,14 +294,14 @@ class MainLevel extends Phaser.Scene{
 
         // Limits to answer
         input_prompt += `Please respond as if you were ${npc_name}. Be brief in response, under 4 sentences.\n\
-            Use casual language and don't be too descriptive. Be confident but a little arrogant.`
+            Use casual language and don't be too descriptive.`
 
         var response_from_NPC = await this.callChatGBT(input_prompt)
     
         // For debugging
-        console.log(response_from_NPC)
+        //console.log(response_from_NPC)
         
-        console.log("OLD MEMORY STREAM: " + this.pQ.items);
+        //console.log("OLD MEMORY STREAM: " + pQ.items);
 
         //Putting New Memories into Memory Stream/PQ
         var question = inputString; //questionToAsk[i];
@@ -249,7 +310,11 @@ class MainLevel extends Phaser.Scene{
         console.log(typeof importancePriority)
         if (this.isInteger(importancePriority)) {
             var importancePriorityNumber = parseInt(importancePriority);
-            this.pQ.enqueue(newMemory, importancePriorityNumber);
+
+            if(this.currentNPC == 0){  this.jake_pQ.enqueue(newMemory, importancePriorityNumber); }
+            if(this.currentNPC == 1){  this.clinton_pQ.enqueue(newMemory, importancePriorityNumber);}
+            if(this.currentNPC == 2){  this.linda_pQ.enqueue(newMemory, importancePriorityNumber);}
+           
         }
         else{
             var tryAgain = "I only wanted you to respond with one number from 1 to 100 rating the importance of the memory: \"" +
@@ -260,7 +325,9 @@ class MainLevel extends Phaser.Scene{
                 console.log(importancePriority);
                 importancePriority = await this.importance(tryAgain);
             }
-            this.pQ.enqueue(newMemory, importancePriorityNumber);
+            if(this.currentNPC == 0){  this.jake_pQ.enqueue(newMemory, importancePriorityNumber); }
+            if(this.currentNPC == 1){  this.clinton_pQ.enqueue(newMemory, importancePriorityNumber);}
+            if(this.currentNPC == 2){  this.linda_pQ.enqueue(newMemory, importancePriorityNumber);}
             // console.log(importancePriority);
             // console.log("ERROR: CHATGPT No Longer Prompts the same way");
             // throw new Error("ERROR: CHATGPT No Longer Prompts the same way");
@@ -273,7 +340,9 @@ class MainLevel extends Phaser.Scene{
         console.log(typeof importancePriority)
         if (this.isInteger(importancePriority)) {
             var importancePriorityNumber = parseInt(importancePriority);
-            this.pQ.enqueue(newMemory, importancePriorityNumber);
+            if(this.currentNPC == 0){  this.jake_pQ.enqueue(newMemory, importancePriorityNumber); }
+            if(this.currentNPC == 1){  this.clinton_pQ.enqueue(newMemory, importancePriorityNumber);}
+            if(this.currentNPC == 2){  this.linda_pQ.enqueue(newMemory, importancePriorityNumber);}
         }
         else{
             var tryAgain = "I only wanted you to respond with one number from 1 to 100 rating the importance of the memory: \"" +
@@ -284,36 +353,11 @@ class MainLevel extends Phaser.Scene{
                 console.log(importancePriority);
                 importancePriority = await this.importance(tryAgain);
             }
-            this.pQ.enqueue(newMemory, importancePriorityNumber);
+            if(this.currentNPC == 0){  this.jake_pQ.enqueue(newMemory, importancePriorityNumber); }
+            if(this.currentNPC == 1){  this.clinton_pQ.enqueue(newMemory, importancePriorityNumber);}
+            if(this.currentNPC == 2){  this.linda_pQ.enqueue(newMemory, importancePriorityNumber);}
         }
 
-        console.log("UPDATED MEMORY STREAM: " + this.pQ.printPQueue());
-
-        console.log("Response: ", response_from_NPC)
-        //Have the ai write out Response (Abel)
-
-        console.log("Initiating response")
-        // this.add.text(10, 100, 'Response:', { fontFamily: 'header',fontSize: '36px', fill: '#ffffff' });
-        // var x = 0
-        // var ff = String(response_from_NPC);
-        // //while (x == 0) {
-        // //    if(ff.length >= 15) {
-        //         console.log(ff.length);
-        //         console.log("long");
-        // //       ff.insert(15, '\n');
-        // //   } else {
-        // //       x++;
-        // //   }
-        // // }
-        // const parts = ff.split(".");
-        // ff = ff.split("!");
-
-        // console.log(parts)
-
-        // var partsString = "";
-        // for(var i=0; i<parts.length; i++){
-        //     partsString += parts[i] + '.' + '\n';
-        // }
         var cutOff = 140;
         var counter = 0;
         var partsString = '';
@@ -329,10 +373,6 @@ class MainLevel extends Phaser.Scene{
         var textContent = this.textResponse.text
         this.textResponse.setText(partsString + "\n\n" + textContent);
 
-    }
-
-    update() {
-        
     }
 }
 
