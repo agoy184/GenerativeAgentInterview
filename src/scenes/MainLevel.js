@@ -135,6 +135,7 @@ class MainLevel extends Phaser.Scene{
     }
 
     create() {
+        //CoreMemory= //PQ
 
         this.CoreMemory= {
             "Steve likes dogs":   4,
@@ -185,12 +186,9 @@ class MainLevel extends Phaser.Scene{
             }
 
         });
+
     }
 
-    //check if string is an integer from chatGPT
-    isInteger(str) {
-        return !isNaN(parseInt(str)) && Number.isInteger(parseFloat(str));
-    }
     
 
     async playerInputtedString(inputString) {
@@ -230,7 +228,7 @@ class MainLevel extends Phaser.Scene{
         input_prompt += `Please respond as if you were ${npc_name}. Be brief in response, under 4 sentences.\n\
             Use casual language and don't be too descriptive. Be confident but a little arrogant.`
 
-        const response_from_NPC = this.callChatGBT(input_prompt)
+        var response_from_NPC = this.callChatGBT(input_prompt)
     
         // For debugging
         console.log(response_from_NPC)
@@ -271,7 +269,6 @@ class MainLevel extends Phaser.Scene{
 
         console.log("Response: ", response_from_NPC)
         //Have the ai write out Response (Abel)
-        
     }
 
 }

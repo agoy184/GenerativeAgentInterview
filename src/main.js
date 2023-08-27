@@ -20,7 +20,7 @@ let config = {
 let game = new Phaser.Game(config);
 
 // Reserve keyboard vars
-let keySPACE;
+let keySPACE, keyENTER;
 let keyW, keyA, keyS, keyD, keyR
 
 // Set UI Sizes
