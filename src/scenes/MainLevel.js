@@ -273,7 +273,9 @@ class MainLevel extends Phaser.Scene{
         console.log("Response: ", response_from_NPC)
         //Have the ai write out Response (Abel)
 
-        
+        console.log("Initiating response")
+        this.add.text(10, 100, 'Response:', { fontFamily: 'header',fontSize: '36px', fill: '#ffffff' });
+        this.add.text(10, 200, response_from_NPC, { fontFamily: 'header', fontSize: '36px', fill: '#ffffff' });
     }
 
 }
