@@ -135,6 +135,8 @@ class MainLevel extends Phaser.Scene{
     }
 
     create() {
+        var maxTextLength = 22;
+
         //CoreMemory= //PQ
 
         this.CoreMemory= {
@@ -275,7 +277,20 @@ class MainLevel extends Phaser.Scene{
 
         console.log("Initiating response")
         this.add.text(10, 100, 'Response:', { fontFamily: 'header',fontSize: '36px', fill: '#ffffff' });
-        this.add.text(10, 200, response_from_NPC, { fontFamily: 'header', fontSize: '36px', fill: '#ffffff' });
+        var x = 0
+        var ff = String(response);
+        //while (x == 0) {
+        //    if(ff.length >= 15) {
+                console.log(ff.length);
+                console.log("long");
+        //       ff.insert(15, '\n');
+        //   } else {
+        //       x++;
+        //   }
+        // }
+        const parts = ff.split(".");
+        this.textResponse = this.add.text(10, 200, parts, { fontFamily: 'header', fontSize: '12px', fill: '#ffffff' });
+
     }
 
 }
