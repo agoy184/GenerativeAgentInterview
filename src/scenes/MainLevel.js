@@ -250,9 +250,18 @@ class MainLevel extends Phaser.Scene{
             this.pQ.enqueue(newMemory, importancePriorityNumber);
         }
         else{
-            console.log(importancePriority);
-            console.log("ERROR: CHATGPT No Longer Prompts the same way");
-            throw new Error("ERROR: CHATGPT No Longer Prompts the same way");
+            var tryAgain = "I only wanted you to respond with one number from 1 to 100 rating the importance of the memory: \"" +
+            newMemory +
+            "\". Try again.";
+            while(!this.isInteger(importancePriority)){
+                console.log("Try Again");
+                console.log(importancePriority);
+                importancePriority = await this.importance(tryAgain);
+            }
+            this.pQ.enqueue(newMemory, importancePriorityNumber);
+            // console.log(importancePriority);
+            // console.log("ERROR: CHATGPT No Longer Prompts the same way");
+            // throw new Error("ERROR: CHATGPT No Longer Prompts the same way");
         }
 
         
@@ -265,9 +274,15 @@ class MainLevel extends Phaser.Scene{
             this.pQ.enqueue(newMemory, importancePriorityNumber);
         }
         else{
-            console.log(importancePriority);
-            console.log("ERROR: CHATGPT No Longer Prompts the same way");
-            throw new Error("ERROR: CHATGPT No Longer Prompts the same way");
+            var tryAgain = "I only wanted you to respond with one number from 1 to 100 rating the importance of the memory: \"" +
+            newMemory +
+            "\". Try again.";
+            while(!this.isInteger(importancePriority)){
+                console.log("Try Again");
+                console.log(importancePriority);
+                importancePriority = await this.importance(tryAgain);
+            }
+            this.pQ.enqueue(newMemory, importancePriorityNumber);
         }
 
         console.log("UPDATED MEMORY STREAM: " + this.pQ.items);
