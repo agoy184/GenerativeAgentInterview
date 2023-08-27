@@ -140,8 +140,6 @@ class MainLevel extends Phaser.Scene{
     }
 
     create() {
-        var maxTextLength = 22;
-
         //CoreMemory= //PQ
 
         this.CoreMemory= {
@@ -201,7 +199,8 @@ class MainLevel extends Phaser.Scene{
     async playerInputtedString(inputString) {
         
         // Pose question to AI in correct form
-        
+        // var responseHeight = 150;
+
         /*
         (NPC)'s status: (NPC) is being interviewed by (PLAYER NAME) for a job at a very important company.
         Observation: (PLAYER NAME) is asking another question in the interview
@@ -311,6 +310,9 @@ class MainLevel extends Phaser.Scene{
 
     }
 
+    update() {
+        
+    }
 }
 
 // https://www.geeksforgeeks.org/implementation-priority-queue-javascript/ 
