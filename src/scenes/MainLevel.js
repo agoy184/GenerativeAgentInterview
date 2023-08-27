@@ -304,6 +304,7 @@ class MainLevel extends Phaser.Scene{
         //   }
         // }
         const parts = ff.split(".");
+        ff = ff.split("!");
         this.textResponse = this.add.text(10, 200, parts, { fontFamily: 'header', fontSize: '12px', fill: '#ffffff' });
 
     }
