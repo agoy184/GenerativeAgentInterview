@@ -285,7 +285,7 @@ class MainLevel extends Phaser.Scene{
             this.pQ.enqueue(newMemory, importancePriorityNumber);
         }
 
-        console.log("UPDATED MEMORY STREAM: " + this.pQ.items);
+        console.log("UPDATED MEMORY STREAM: " + this.pQ.printPQueue());
 
         console.log("Response: ", response_from_NPC)
         //Have the ai write out Response (Abel)
