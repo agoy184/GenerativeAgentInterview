@@ -188,23 +188,25 @@ let questionToAsk = [
     "What is a time that you were a leader?"
 ]
 
+//check if string is an integer from chatGPT
+function isInteger(str) {
+    return !isNaN(parseInt(str)) && Number.isInteger(parseFloat(str));
+}
+
 for (let i = 0; i < questionToAsk.length; i++) {
+
+    //rate the importance of a new memory and put it into the PQ
     var question = questionToAsk[i];
     var newMemory = "You got asked the question: " + question;
     var importancePriority = await importance(newMemory);
-
     console.log(typeof importancePriority)
-    //check if string is an integer from chatGPT
-    function isInteger(str) {
-        return !isNaN(parseInt(str)) && Number.isInteger(parseFloat(str));
-    }
-
     if (isInteger(importancePriority)) {
         var importancePriorityNumber = parseInt(importancePriority);
         pQ.enqueue(newMemory, importancePriorityNumber);
     }
     else{
-        console.log("ERROR: CHATGPT No Longer Prompts the same way")
+        console.log("ERROR: CHATGPT No Longer Prompts the same way");
+        throw new Error("ERROR: CHATGPT No Longer Prompts the same way");
     }
 }
 
