@@ -314,7 +314,7 @@ class MainLevel extends Phaser.Scene{
         // for(var i=0; i<parts.length; i++){
         //     partsString += parts[i] + '.' + '\n';
         // }
-        var cutOff = 160;
+        var cutOff = 140;
         var counter = 0;
         var partsString = '';
         for(var i=0; i<response_from_NPC.length; i++){
@@ -327,7 +327,7 @@ class MainLevel extends Phaser.Scene{
         }
 
         var textContent = this.textResponse.text
-        this.textResponse.setText(partsString + '\n' + textContent);
+        this.textResponse.setText(partsString + "\n\n" + textContent);
 
     }
 
