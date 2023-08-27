@@ -27,6 +27,15 @@ class Load extends Phaser.Scene {
 
         // character images
         this.load.image('Keizo', 'sprites/keizo_spr.png')
+        
+        this.load.image('intern5', 'sprites/intern5/intern5.png')
+        this.load.image('intern5Talk', 'sprites/intern5/intern5Talk.png')
+        this.load.image('intern5Happy', 'sprites/intern5/intern5Happy.png')
+        this.load.image('intern5HappyTalk', 'sprites/intern5/intern5HappyTalk.png')
+        this.load.image('intern5Sad', 'sprites/intern5/intern5Sad.png')
+        this.load.image('intern5SadTalk', 'sprites/intern5/intern5SadTalk.png')
+        this.load.image('intern5Shock', 'sprites/intern5/intern5Shock.png')
+        this.load.image('intern5ShockTalk', 'sprites/intern5/intern5ShockTalk.png')
 
         // tilemap
 
