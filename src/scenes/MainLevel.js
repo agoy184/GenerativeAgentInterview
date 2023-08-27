@@ -171,8 +171,9 @@ class MainLevel extends Phaser.Scene{
         this.add.text(10, 10, 'Enter your question:', { fontFamily: 'header', fontSize: '36px', fill: '#ffffff' });
 
         const textEntry = this.add.text(10, 50, '', { fontFamily: 'type', fontSize: '36px',  fill: '#ffff00' });
-
-        this.textResponse = this.add.text(10, 200, 'Response:', { fontFamily: 'header', fontSize: '12px', fill: '#ffffff' });
+        
+        const monospacedFont = 'Monaco';
+        this.textResponse = this.add.text(10, 200, '', { fontFamily: monospacedFont, fontSize: '16px', fill: '#ffffff' });
 
         this.input.keyboard.on('keydown', event =>
         {
@@ -264,7 +265,7 @@ class MainLevel extends Phaser.Scene{
             // console.log("ERROR: CHATGPT No Longer Prompts the same way");
             // throw new Error("ERROR: CHATGPT No Longer Prompts the same way");
         }
-
+        
         //Putting New Memories into Memory Stream/PQ
         var response = response_from_NPC; //questionToAsk[i];
         var newMemory = "You responded to the question: " + question + " With the response: " + response;
@@ -293,22 +294,40 @@ class MainLevel extends Phaser.Scene{
 
         console.log("Initiating response")
         // this.add.text(10, 100, 'Response:', { fontFamily: 'header',fontSize: '36px', fill: '#ffffff' });
-        var x = 0
-        var ff = String(response);
-        //while (x == 0) {
-        //    if(ff.length >= 15) {
-                console.log(ff.length);
-                console.log("long");
-        //       ff.insert(15, '\n');
-        //   } else {
-        //       x++;
-        //   }
+        // var x = 0
+        // var ff = String(response_from_NPC);
+        // //while (x == 0) {
+        // //    if(ff.length >= 15) {
+        //         console.log(ff.length);
+        //         console.log("long");
+        // //       ff.insert(15, '\n');
+        // //   } else {
+        // //       x++;
+        // //   }
+        // // }
+        // const parts = ff.split(".");
+        // ff = ff.split("!");
+
+        // console.log(parts)
+
+        // var partsString = "";
+        // for(var i=0; i<parts.length; i++){
+        //     partsString += parts[i] + '.' + '\n';
         // }
-        const parts = ff.split(".");
-        ff = ff.split("!");
+        var cutOff = 160;
+        var counter = 0;
+        var partsString = '';
+        for(var i=0; i<response_from_NPC.length; i++){
+            partsString += response_from_NPC[i];
+            counter += 1;
+            if(counter>cutOff){
+                partsString += '\n';
+                counter = 0;
+            } 
+        }
 
         var textContent = this.textResponse.text
-        this.textResponse.setText(parts + '\n' + textContent);
+        this.textResponse.setText(partsString + '\n' + textContent);
 
     }
 
