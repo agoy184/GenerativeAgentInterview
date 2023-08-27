@@ -264,7 +264,7 @@ class MainLevel extends Phaser.Scene{
             // throw new Error("ERROR: CHATGPT No Longer Prompts the same way");
         }
 
-        
+        //Putting New Memories into Memory Stream/PQ
         var response = response_from_NPC; //questionToAsk[i];
         var newMemory = "You responded to the question: " + question + " With the response: " + response;
         var importancePriority = await this.importance(newMemory);
