@@ -152,6 +152,15 @@ class MainLevel extends Phaser.Scene{
             frameRate: 4,
             repeat: -1
         });
+        // Add interviewee NPC sprite
+        this.intern1 = this.add.sprite(215, 355, 'intern1').setScale(0.7);
+        // this.intern5 = this.add.sprite(355, 355, 'intern5').setScale(0.7);
+        // this.intern5 = this.add.sprite(355, 355, 'intern5').setScale(0.7);
+        // this.intern5 = this.add.sprite(355, 355, 'intern5').setScale(0.7);
+        this.intern5 = this.add.sprite(355, 355, 'intern5').setScale(0.7);
+
+
+        //CoreMemory= //PQ
 
         this.loadingAnim = this.add.sprite(10,100,'loadingDots').setOrigin(0,0).setScale(0.5);
 
