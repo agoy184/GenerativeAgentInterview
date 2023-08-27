@@ -229,6 +229,10 @@ class MainLevel extends Phaser.Scene{
         // Set up Input
         this.add.text(10, 10, 'Enter your question:', { fontFamily: 'header', fontSize: '36px', fill: '#ffffff' });
 
+        this.questionsLeft = 11;
+        // Set up Input
+        this.questionsLeftText = this.add.text(850, 5, this.questionsLeft + ' Q\'s left', { fontFamily: 'header', fontSize: '36px', fill: '#000' }).setOrigin(1,0);
+
         const textEntry = this.add.text(10, 50, '', { fontFamily: 'type', fontSize: '36px',  fill: '#ffff00' });
         
         const monospacedFont = 'Monaco';
@@ -242,13 +246,14 @@ class MainLevel extends Phaser.Scene{
                 if(this.currentNPC>2){
                     this.currentNPC = 0
                 }
-                console.log("New NPC is: "+ this.npcNames[this.currentNPC])
+                console.log("New NPC is: "+ this.npcNames[this.currentNPC]);
             }
 
             if (textEntry.text.substr(textEntry.text.length - 1,textEntry.text.length) === "?" &&  event.keyCode === 13){
                 await this.run(textEntry.text)
-
-                textEntry.text = ""
+                textEntry.text = "";
+                this.questionsLeft-=1;
+                this.questionsLeftText.setText(this.questionsLeft + ' Q\'s left');
             }
             else if (event.keyCode === 8 && textEntry.text.length > 0)
             {
