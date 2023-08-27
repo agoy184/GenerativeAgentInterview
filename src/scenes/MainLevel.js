@@ -211,10 +211,7 @@ class MainLevel extends Phaser.Scene{
         input_prompt += `Please respond as if you were ${npc_name}. Be brief in response, under 4 sentences.\n\
             Use casual language and don't be too descriptive. Be confident but a little arrogant.`
 
-        var response_from_NPC = this.callChatGBT(input_prompt)
-    
-        // For debugging
-        console.log(response_from_NPC)
+        var response_from_NPC = await this.callChatGBT(input_prompt)
         
         //PlayerInput is then added into CoreMemory () (Dylan)
 
