@@ -141,14 +141,15 @@ class MainLevel extends Phaser.Scene{
 
     create() {
         // Add interviewee NPC sprite
-        this.intern1 = this.add.sprite(215, 355, 'intern1').setScale(0.7);
+        this.candidate1 = this.add.sprite(960, 640, 'candidate1').setScale(0.3).setOrigin(1,1);
         // this.intern5 = this.add.sprite(355, 355, 'intern5').setScale(0.7);
         // this.intern5 = this.add.sprite(355, 355, 'intern5').setScale(0.7);
         // this.intern5 = this.add.sprite(355, 355, 'intern5').setScale(0.7);
-        this.intern5 = this.add.sprite(355, 355, 'intern5').setScale(0.7);
+        this.candidate5 = this.add.sprite(970, 650, 'candidate5').setScale(0.7).setOrigin(1,1);
 
 
         
+        //loading dots animation and sprite
         this.anims.create({
             key: 'load',
             frames: this.anims.generateFrameNames('loadingDots', {
