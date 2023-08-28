@@ -335,6 +335,7 @@ class MainLevel extends Phaser.Scene{
             if(event.keyCode === 38){
                 this.currentNPC += 1
                 if(this.currentNPC>2){
+                    this.scene.start('resultsScene');  
                     this.currentNPC = 0
                 }
                 this.textResponse.setText('');
@@ -408,7 +409,7 @@ class MainLevel extends Phaser.Scene{
         
         await asyncPromise;
         
-        this.loadingAnim.anims.stop('load');
+        // this.loadingAnim.anims.stop('load');
     }
 
     async displayResponse(inputString){
@@ -567,6 +568,8 @@ class MainLevel extends Phaser.Scene{
             } 
         }
 
+        this.loadingAnim.anims.stop('load');
+        
         console.log('got to this.respondWithSpeech');
         await this.respondWithSpeach(partsString);
     }
