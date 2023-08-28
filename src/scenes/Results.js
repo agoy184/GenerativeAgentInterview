@@ -55,16 +55,17 @@ class Results extends Phaser.Scene{
         this.jake_CoreMemory = {
             "Jake is a tiny bit arrogant and confident." : 100,
             "Jake donated both of his kidneys.": 100,
-            "Jake is a Olympic gold medalist.": 80,
-            "Jake has been fired 55 times.": 80,
-            "Jake has stolen two cars in his lifetime but never caught.": 90,
-            "Jake's Dog is named Snuckles.": 40,
-            "Jake's Dog Snuckles is 5 years old.": 50,
-            "Jake's Dog Snuckles loves bagels.": 20,
-            "Jake can't drive.": 50,
-            "Jake can't jump that good and is sad about it.": 90,
-            "Jake doesn't like being asked questions about the olympics.": 60,
-            "Jake's mom thinks he isn't going to make it as a car thief.": 80
+            "Jake used to work as a garbage boy at Safeway": 90,
+            "Jake can only cook Quesadillas and French Toast.": 80,
+            "Jake can't jump that good and is sad about it.": 80,
+            "Jake was part of the cooking club in high school.": 80,
+            "Jake is a high school student in Santa Cruz.": 70,
+            "Jake has been fired twice.": 70,
+            "Jake takes short bathroom breaks, but he peed his pants one time from going too fast.": 60,
+            "Jake burns his food often, and his mother says he’s proud of him": 50,
+            "Jake has a 3.6 GPA.": 50, 
+            "Jake does track at his high school.": 40,
+            "Jake can't drive.": 20
         }
 
         // PERSON 2, Clinton a former class president of his elementary school, and shy about his CEO position at Microsoft
@@ -98,7 +99,7 @@ class Results extends Phaser.Scene{
 
         //selected person detail
         this.detailsTop = this.add.text(450, 10, '', { fontFamily: 'header', fontSize: '32px', fill: '#000' }).setOrigin(0,0);
-        this.details = this.add.text(400, 100, '', { fontFamily: 'header', fontSize: '20px', fill: '#000' }).setOrigin(0,0);
+        this.details = this.add.text(380, 100, '', { fontFamily: 'header', fontSize: '15px', fill: '#000' }).setOrigin(0,0);
     }
     
     update() {
