@@ -229,7 +229,7 @@ class MainLevel extends Phaser.Scene{
         // Set up Input
         this.topPrompt = this.add.text(10, 10, 'Enter your question:', { fontFamily: 'header', fontSize: '36px', fill: '#ffffff' });
 
-        this.startQuestions = 5;
+        this.startQuestions = 11; //5;
         this.questionsLeft = this.startQuestions;
         // Set up Input
         this.questionsLeftText = this.add.text(850, 5, this.questionsLeft + ' Q\'s left', { fontFamily: 'header', fontSize: '36px', fill: '#000' }).setOrigin(1,0);
