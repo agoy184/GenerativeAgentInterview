@@ -459,6 +459,7 @@ class MainLevel extends Phaser.Scene{
             "Clinton is kind and shy" : 100,
             "Clinton is a former class president of his elementary school.": 100,
             "Clinton hates questions about his relationships." : 90,
+            "Clinton doesn't know how to use video chat." : 80,
             "Clinton is shy about his CEO position at Microsoft.": 80,
             "Clinton loves ice cream, but only in a dish.": 70,
             "Clinton has no pets and is sad about it.": 40,
