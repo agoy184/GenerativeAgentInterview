@@ -456,7 +456,6 @@ class MainLevel extends Phaser.Scene{
 
 
         // PERSON 2, Clinton a former class president of his elementary school, and shy about his CEO position at Microsoft
-
         this.clinton_CoreMemory = {
             "Clinton is kind and shy" : 100,
             "Clinton is a former class president of his elementary school.": 100,

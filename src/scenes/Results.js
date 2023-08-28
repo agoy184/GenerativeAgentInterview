@@ -53,19 +53,19 @@ class Results extends Phaser.Scene{
 
         // PERSON 1, Jake a charitable guy, Olympic gold metalist, with a record of being fired 55 times and highway robbery
         this.jake_CoreMemory = {
-            "Jake is a tiny bit arrogant and confident." : 100,
-            "Jake donated both of his kidneys.": 100,
-            "Jake used to work as a garbage boy at Safeway": 90,
-            "Jake can only cook Quesadillas and French Toast.": 80,
-            "Jake can't jump that good and is sad about it.": 80,
-            "Jake was part of the cooking club in high school.": 80,
-            "Jake is a high school student in Santa Cruz.": 70,
-            "Jake has been fired twice.": 70,
-            "Jake takes short bathroom breaks, but he peed his pants one time from going too fast.": 60,
-            "Jake burns his food often, and his mother says he’s proud of him": 50,
-            "Jake has a 3.6 GPA.": 50, 
-            "Jake does track at his high school.": 40,
-            "Jake can't drive.": 20
+            "Jake likes dogs":   40,
+            "Jake worked at the cat cafe": 40,
+            "Jake has a freight license":  60,
+            "Jake is a olympic gold medalist":  90,
+            "Jake burned a few houses down":  20,
+            "Jake really likes megazord":  90,
+            "Jake can drive":  30,
+            "Jake thinks hes super cool":  80,
+            "Jake was a major part of watergate":  60,
+            "Jake voted for himself in the last election":  80,
+            "Jake cant read":  50,
+            "Jake cant jump that good":  30,
+            "Jake eats cats":  50
         }
 
         // PERSON 2, Clinton a former class president of his elementary school, and shy about his CEO position at Microsoft
@@ -73,6 +73,7 @@ class Results extends Phaser.Scene{
             "Clinton is kind and shy" : 100,
             "Clinton is a former class president of his elementary school.": 100,
             "Clinton hates questions about his relationships." : 90,
+            "Clinton doesn't know how to use video chat." : 80,
             "Clinton is shy about his CEO position at Microsoft.": 80,
             "Clinton loves ice cream, but only in a dish.": 70,
             "Clinton has no pets and is sad about it.": 40,
