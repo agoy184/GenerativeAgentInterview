@@ -174,7 +174,7 @@ class MainLevel extends Phaser.Scene{
         this.candidate4.setFrame('neutral (1)');
         this.candidate5.setFrame('neutral (1)');
 
-        //loading dots animation and sprite
+        //Neutral Talk Anim
         this.anims.create({
             key: 'neutralTalk1',
             frames: this.anims.generateFrameNames('candidate1', {
@@ -230,6 +230,177 @@ class MainLevel extends Phaser.Scene{
             frameRate: 4,
             repeat: -1
         });
+
+        //Happy Talk Anim
+        this.anims.create({
+            key: 'happyTalk1',
+            frames: this.anims.generateFrameNames('candidate1', {
+                prefix: 'happy (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'happyTalk2',
+            frames: this.anims.generateFrameNames('candidate2', {
+                prefix: 'happy (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'happyTalk3',
+            frames: this.anims.generateFrameNames('candidate3', {
+                prefix: 'happy (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'happyTalk4',
+            frames: this.anims.generateFrameNames('candidate4', {
+                prefix: 'happy (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'happyTalk5',
+            frames: this.anims.generateFrameNames('candidate5', {
+                prefix: 'happy (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+
+        //Sad Talk Anim
+        this.anims.create({
+            key: 'sadTalk1',
+            frames: this.anims.generateFrameNames('candidate1', {
+                prefix: 'sad (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'sadTalk2',
+            frames: this.anims.generateFrameNames('candidate2', {
+                prefix: 'sad (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'sadTalk3',
+            frames: this.anims.generateFrameNames('candidate3', {
+                prefix: 'sad (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'sadTalk4',
+            frames: this.anims.generateFrameNames('candidate4', {
+                prefix: 'sad (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'sadTalk5',
+            frames: this.anims.generateFrameNames('candidate5', {
+                prefix: 'sad (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+
+        //Shock Talk Anim
+        this.anims.create({
+            key: 'shockTalk1',
+            frames: this.anims.generateFrameNames('candidate1', {
+                prefix: 'shock (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'shockTalk2',
+            frames: this.anims.generateFrameNames('candidate2', {
+                prefix: 'shock (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'shockTalk3',
+            frames: this.anims.generateFrameNames('candidate3', {
+                prefix: 'shock (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'shockTalk4',
+            frames: this.anims.generateFrameNames('candidate4', {
+                prefix: 'shock (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'shockTalk5',
+            frames: this.anims.generateFrameNames('candidate5', {
+                prefix: 'shock (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
         
         //loading dots animation and sprite
         this.anims.create({
@@ -251,20 +422,36 @@ class MainLevel extends Phaser.Scene{
 
         // PERSON 1, Jake a charitable guy, Olympic gold metalist, with a record of being fired 55 times and highway robbery
 
+        // this.jake_CoreMemory = {
+        //     "Jake is a arrogant and confident." : 100,
+        //     "Jake donated both of his kidneys.": 100,
+        //     "Jake is a Olympic gold medalist.": 80,
+        //     "Jake has been fired 55 times.": 80,
+        //     "Jake has stolen two cars in his lifetime but never caught.": 90,
+        //     "Jake's Dog is named Snuckles.": 40,
+        //     "Jake's Dog Snuckles is 5 years old.": 50,
+        //     "Jake's Dog Snuckles loves bagels.": 20,
+        //     "Jake can't drive.": 50,
+        //     "Jake can't jump that good and is sad about it.": 90,
+        //     "Jake doesn't like being asked questions about the olympics.": 60,
+        //     "Jake's mom thinks he isn't going to make it as a car thief.": 80
+        // }
         this.jake_CoreMemory = {
-            "Jake is a arrogant and confident." : 100,
+            "Jake is a tiny bit arrogant and confident." : 100,
             "Jake donated both of his kidneys.": 100,
-            "Jake is a Olympic gold medalist.": 80,
-            "Jake has been fired 55 times.": 80,
-            "Jake has stolen two cars in his lifetime but never caught.": 90,
-            "Jake's Dog is named Snuckles.": 40,
-            "Jake's Dog Snuckles is 5 years old.": 50,
-            "Jake's Dog Snuckles loves bagels.": 20,
-            "Jake can't drive.": 50,
-            "Jake can't jump that good and is sad about it.": 90,
-            "Jake doesn't like being asked questions about the olympics.": 60,
-            "Jake's mom thinks he isn't going to make it as a car thief.": 80
+            "Jake used to work as a garbage boy at Safeway": 90,
+            "Jake can only cook Quesadillas and French Toast.": 80,
+            "Jake can't jump that good and is sad about it.": 80,
+            "Jake was part of the cooking club in high school.": 80,
+            "Jake is a high school student in Santa Cruz.": 70,
+            "Jake has been fired twice.": 70,
+            "Jake takes short bathroom breaks, but he peed his pants one time from going too fast.": 60,
+            "Jake burns his food often, and his mother says he’s proud of him": 50,
+            "Jake has a 3.6 GPA.": 50, 
+            "Jake does track at his high school.": 40,
+            "Jake can't drive.": 20
         }
+
 
         // PERSON 2, Clinton a former class president of his elementary school, and shy about his CEO position at Microsoft
 
@@ -397,7 +584,7 @@ class MainLevel extends Phaser.Scene{
             }
         });
 
-
+        this.emotionSpeech = 'neutral';
 
     }
 
@@ -429,6 +616,42 @@ class MainLevel extends Phaser.Scene{
         }
     }
 
+    isEmotion(inputString){
+        if(inputString == 'sad'){
+            return true;
+        }
+        if(inputString == 'happy'){
+            return true;
+        }
+        if(inputString == 'neutral'){
+            return true;
+        }
+        if(inputString == 'shock'){
+            return true;
+        }
+        return false
+    }
+
+    //prompt GPT for an emotion
+    async whatEmotion(inputQuestion) {
+        var gptQuestion = `What is the most likely emotion a candidate being interviewed would feel when asked this question: "${inputQuestion}">`
+            + `only respond with one of the following words: (sad, happy, neutral, shock).`;
+        var emotionResponse = await this.callChatGBT(gptQuestion);
+
+        if (!this.isEmotion(emotionResponse)) {
+            var tryAgain = "Remember to only respond with one of the following words: (sad, happy, neutral, shock). Try again.";
+            while(!this.isEmotion(emotionResponse)){
+                console.log(tryAgain);
+                console.log("Try Again");
+                console.log(emotionResponse);
+                emotionResponse = await this.callChatGBT(tryAgain);
+            }
+            console.log('FOUND!', emotionResponse);
+        }
+
+        this.emotionSpeech = emotionResponse;
+    }
+
     //aycnc + await management from chat gpt 
     async respondWithSpeach(inputString) {
         const asyncPromise = this.displayResponse(inputString);
@@ -440,13 +663,13 @@ class MainLevel extends Phaser.Scene{
             if(this.candidates[i].alpha == 1){
                 visibleCandidate = this.candidates[i];
                 visibleCandidateNumber = i+1;
-                this.candidates[i].anims.play('neutralTalk' + visibleCandidateNumber);
+                this.candidates[i].anims.play(this.emotionSpeech + 'Talk' + visibleCandidateNumber);
             }
         }
 
         await asyncPromise;
         
-        visibleCandidate.anims.stop('neutralTalk' + visibleCandidateNumber);
+        visibleCandidate.anims.stop(this.emotionSpeech + 'Talk' + visibleCandidateNumber);
     }
 
     async playerInputtedString(inputString) {
@@ -501,6 +724,10 @@ class MainLevel extends Phaser.Scene{
 
         //Putting New Memories into Memory Stream/PQ
         var question = inputString; //questionToAsk[i];
+
+        //vategorizing the question as an emotion for mii emotions
+        this.whatEmotion(question);
+
         var newMemory = "You got asked the question: " + question;
 
         //experimenting with taking out having just the question as a memory
@@ -571,9 +798,11 @@ class MainLevel extends Phaser.Scene{
 
         this.loadingAnim.anims.stop('load');
         
+        console.log(response_from_NPC);
         console.log('got to this.respondWithSpeech');
         await this.respondWithSpeach(partsString);
         console.log(response_from_NPC);
+        console.log(this.emotionSpeech);
     }
 }
 
