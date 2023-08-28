@@ -153,6 +153,11 @@ class MainLevel extends Phaser.Scene{
         this.add.image(0,0, 'bottomUI').setDepth(0).setOrigin(0,0);
         this.add.image(0,0, 'topUI').setDepth(10).setOrigin(0,0);
 
+
+        //adding Zoom UI layers
+        this.add.image(15,48, 'topZoom').setDepth(10).setOrigin(0,0).setScale(0.3625);
+        this.add.image(15,425, 'bottomZoom').setDepth(10).setOrigin(0,0).setScale(0.3625);
+
         // Add interviewee NPC sprite
         this.candidate1 = this.add.sprite(-20, 0, 'candidate1').setScale(0.4).setOrigin(0,0).setAlpha(1); //Jake
         this.candidate2 = this.add.sprite(-20, 0, 'candidate2').setScale(0.8).setOrigin(0,0).setAlpha(0);

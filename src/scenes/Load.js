@@ -75,6 +75,8 @@ class Load extends Phaser.Scene {
 
         this.load.image('topUI','UI_toplayer.png');
         this.load.image('bottomUI','UI_bottomlayer.png');
+        this.load.image('topZoom','zoomOutlineTop.png');
+        this.load.image('bottomZoom','zoomOutlineBottom.png');
 
         this.load.atlas('candidate1', 'sprites/intern1/candidate1.png', 'sprites/intern1/candidate1.json');
         this.load.atlas('candidate2', 'sprites/intern2/candidate2.png', 'sprites/intern2/candidate2.json');
