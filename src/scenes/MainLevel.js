@@ -439,7 +439,7 @@ class MainLevel extends Phaser.Scene{
         this.jake_CoreMemory = {
             "Jake likes dogs":   40,
             "Jake worked at the cat cafe": 40,
-            "Jake has a freight licence":  60,
+            "Jake has a freight license":  60,
             "Jake is a olympic gold medalist":  90,
             "Jake burned a few houses down":  20,
             "Jake really likes megazord":  90,
