@@ -79,37 +79,39 @@ class MainLevel extends Phaser.Scene{
                 console.log('FOUND!', response);
             }
 
-            // get numbers from string
-            let NumbersFromString=0
-            NumbersFromString= parseInt(response)
+            if (this.isInteger(response)) {
+                // get numbers from string
+                let NumbersFromString=0
+                NumbersFromString = parseInt(response);
 
-            //console.log(NumbersFromString)
+                console.log(NumbersFromString)
 
-            //find the relevance number 
-            let rel = NumbersFromString            
-            //console.log(rel)
-            // get to total retrieval. simple way by just adding them.
-            let retrieval = rel + mem[i].prority 
+                //find the relevance number 
+                let rel = NumbersFromString            
+                //console.log(rel)
+                // get to total retrieval. simple way by just adding them.
+                let retrieval = rel + mem[i].prority 
 
-            //if 10 elements in dict
-            if (Object.keys(dic).length == 10){
-                // if lowest value in dict is lower than current retrieval
-                if( Math.min(Object.values(dic)) < retrieval){
+                //if 10 elements in dict
+                if (Object.keys(dic).length == 10){
+                    // if lowest value in dict is lower than current retrieval
+                    if( Math.min(Object.values(dic)) < retrieval){
 
-                    //find the key
-                    let RepKey=Object.keys(obj).find(key => obj[key] === value)
-                    //remove that element
-                    dic.delete(RepKey)
+                        //find the key
+                        let RepKey=Object.keys(obj).find(key => obj[key] === value)
+                        //remove that element
+                        dic.delete(RepKey)
 
+                        dic[key]=retrieval
+
+                    }
+
+                }
+                else{
+                    //add to new dic with new number
                     dic[key]=retrieval
 
                 }
-
-            }
-            else{
-                //add to new dic with new number
-                dic[key]=retrieval
-
             }
         }
         //array of top 10 memories
@@ -665,7 +667,8 @@ class MainLevel extends Phaser.Scene{
             if(this.candidates[i].alpha == 1){
                 visibleCandidate = this.candidates[i];
                 visibleCandidateNumber = i+1;
-                this.candidates[i].anims.play(this.emotionSpeech + 'Talk' + visibleCandidateNumber);
+                var animString = this.emotionSpeech + 'Talk' + visibleCandidateNumber;
+                this.candidates[i].anims.play(animString);
             }
         }
 
@@ -727,6 +730,8 @@ class MainLevel extends Phaser.Scene{
         //Putting New Memories into Memory Stream/PQ
         var question = inputString; //questionToAsk[i];
 
+        //outputting question to console
+        console.log(question);
         //vategorizing the question as an emotion for mii emotions
         this.whatEmotion(question);
 
