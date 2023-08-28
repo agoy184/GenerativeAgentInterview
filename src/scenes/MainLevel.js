@@ -145,11 +145,13 @@ class MainLevel extends Phaser.Scene{
         this.add.image(0,0, 'topUI').setDepth(10).setOrigin(0,0);
 
         // Add interviewee NPC sprite
-        this.candidate1 = this.add.sprite(-20, 0, 'candidate1').setScale(0.4).setOrigin(0,0); //Jake
-        // this.candidate2 = this.add.sprite(960, 640, 'candidate2').setScale(0.4).setOrigin(1,1);
-        this.candidate3 = this.add.sprite(-20, 0, 'candidate3').setScale(0.8).setOrigin(0,0); //Clinton
-        this.candidate4 = this.add.sprite(-20, 0, 'candidate4').setScale(0.4).setOrigin(0,0); //Linda
-        // this.candidate5 = this.add.sprite(970, 650, 'candidate5').setScale(0.7).setOrigin(1,1);
+        this.candidate1 = this.add.sprite(-20, 0, 'candidate1').setScale(0.4).setOrigin(0,0).setAlpha(1); //Jake
+        this.candidate2 = this.add.sprite(-20, 0, 'candidate2').setScale(0.8).setOrigin(0,0).setAlpha(0);
+        this.candidate3 = this.add.sprite(-20, 0, 'candidate3').setScale(0.8).setOrigin(0,0).setAlpha(0); //Clinton
+        this.candidate4 = this.add.sprite(-20, 0, 'candidate4').setScale(0.4).setOrigin(0,0).setAlpha(0); //Linda
+        this.candidate5 = this.add.sprite(-20, 0, 'candidate5').setScale(0.8).setOrigin(0,0).setAlpha(0);
+
+        this.candidates = [this.candidate1,this.candidate2,this.candidate3,this.candidate4,this.candidate5];
         
         //loading dots animation and sprite
         this.anims.create({
@@ -264,6 +266,26 @@ class MainLevel extends Phaser.Scene{
                 this.questionsLeftText.setText(this.questionsLeft + ' Q\'s left');
                 this.topPrompt.setText('Enter your question:');
                 console.log("New NPC is: "+ this.npcNames[this.currentNPC]);
+
+                if(this.currentNPC == 0){
+                    for(i=0; i<this.candidates.length; i++){
+                        this.candidates[i].setAlpha(0);
+                    }
+                    this.candidate1.setAlpha(1);
+                }
+                if(this.currentNPC == 1){
+                    for(i=0; i<this.candidates.length; i++){
+                        this.candidates[i].setAlpha(0);
+                    }
+                    this.candidate3.setAlpha(1);
+                }
+                if(this.currentNPC == 2){
+                    for(i=0; i<this.candidates.length; i++){
+                        this.candidates[i].setAlpha(0);
+                    }
+                    this.candidate3.setAlpha(1);
+                }
+
             }
 
             if(this.questionsLeft>=0){
