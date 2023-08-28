@@ -141,6 +141,7 @@ class MainLevel extends Phaser.Scene{
 
     create() {
         // Add interviewee NPC sprite
+
         this.candidate1 = this.add.sprite(960, 640, 'candidate1').setScale(0.3).setOrigin(1,1);
         this.candidate2 = this.add.sprite(960, 640, 'candidate2').setScale(0.4).setOrigin(1,1);
         this.candidate3 = this.add.sprite(960, 640, 'candidate3').setScale(0.4).setOrigin(1,1);
