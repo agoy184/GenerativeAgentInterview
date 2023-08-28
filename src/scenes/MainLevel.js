@@ -785,17 +785,19 @@ class MainLevel extends Phaser.Scene{
             if(this.currentNPC == 2){  this.linda_pQ.enqueue(newMemory, importancePriorityNumber);}
         }
 
-        var cutOff = 63;
-        var counter = 0;
-        var partsString = '';
-        for(var i=0; i<response_from_NPC.length; i++){
-            partsString += response_from_NPC[i];
-            counter += 1;
-            if(counter>cutOff){
-                partsString += '\n';
-                counter = 0;
-            } 
-        }
+        // var cutOff = 70;
+        // var counter = 0;
+        // var partsString = '';
+        // for(var i=0; i<response_from_NPC.length; i++){
+        //     partsString += response_from_NPC[i];
+        //     counter += 1;
+        //     if(counter>cutOff){
+        //         partsString += '\n';
+        //         counter = 0;
+        //     } 
+        // }
+
+        var partsString = response_from_NPC;
 
         this.loadingAnim.anims.stop('load');
         
