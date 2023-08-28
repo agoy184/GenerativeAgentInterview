@@ -437,19 +437,19 @@ class MainLevel extends Phaser.Scene{
         //     "Jake's mom thinks he isn't going to make it as a car thief.": 80
         // }
         this.jake_CoreMemory = {
-            "Jake likes dogs":   4,
-            "Jake worked at the cat cafe": 4,
-            "Jake has a freight licence":  6,
-            "Jake is a olympic gold medalist":  9,
-            "Jake burned a few houses down":  2,
-            "Jake really likes megazord":  9,
-            "Jake cant drive":  3,
-            "Jake thinks hes super cool":  8,
-            "Jake was a major part of watergate":  6,
-            "Jake voted for himself in the last election":  8,
-            "Jake cant read":  5,
-            "Jake cant jump that good":  3,
-            "Jake eats cats":   5
+            "Jake likes dogs":   40,
+            "Jake worked at the cat cafe": 40,
+            "Jake has a freight licence":  60,
+            "Jake is a olympic gold medalist":  90,
+            "Jake burned a few houses down":  20,
+            "Jake really likes megazord":  90,
+            "Jake can drive":  30,
+            "Jake thinks hes super cool":  80,
+            "Jake was a major part of watergate":  60,
+            "Jake voted for himself in the last election":  80,
+            "Jake cant read":  50,
+            "Jake cant jump that good":  30,
+            "Jake eats cats":   50
         }
 
 
