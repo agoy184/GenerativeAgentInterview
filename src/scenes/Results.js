@@ -97,7 +97,7 @@ class Results extends Phaser.Scene{
         }
 
         //selected person detail
-        this.detailsTop = this.add.text(450, 10, 'You chose Clinton.\nHere are his details:\n', { fontFamily: 'header', fontSize: '32px', fill: '#000' }).setOrigin(0,0).setAlpha(0);
+        this.detailsTop = this.add.text(450, 10, '', { fontFamily: 'header', fontSize: '32px', fill: '#000' }).setOrigin(0,0);
         this.details = this.add.text(400, 100, '', { fontFamily: 'header', fontSize: '20px', fill: '#000' }).setOrigin(0,0);
     }
     
@@ -135,7 +135,8 @@ class Results extends Phaser.Scene{
             var newDetailText = '';
             if(this.optionIndex == 0){
                 this.candidate1.setAlpha(1);
-                this.detailsTop.setAlpha(1);
+                newDetailText = '';
+                this.detailsTop.setText('You chose Jake.\nHere are his details:\n');
                 for(const key in this.jake_CoreMemory){
                     var value = this.jake_CoreMemory[key];
                     newDetailText += key+': '+value+'\n';
@@ -151,8 +152,8 @@ class Results extends Phaser.Scene{
             }
             if(this.optionIndex == 1){
                 this.candidate3.setAlpha(1);
-                this.detailsTop.setAlpha(1);
-                newDetailText = 'You chose Clinton.\nHere are his details:\n';
+                this.detailsTop.setText('You chose Clinton.\nHere are his details:\n');
+                newDetailText = '';
                 for(const key in this.clinton_CoreMemory){
                     var value = this.clinton_CoreMemory[key];
                     newDetailText += key+': '+value+'\n';
@@ -161,8 +162,8 @@ class Results extends Phaser.Scene{
             }
             if(this.optionIndex == 2){
                 this.candidate4.setAlpha(1);
-                this.detailsTop.setAlpha(1);
-                newDetailText = 'You chose Linda.\nHere are her details:\n';
+                this.detailsTop.setText('You chose Linda.\nHere are her details:\n');
+                newDetailText = '';
                 for(const key in this.linda_CoreMemory){
                     var value = this.linda_CoreMemory[key];
                     newDetailText += key+': '+value+'\n';
