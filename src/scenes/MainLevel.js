@@ -166,6 +166,69 @@ class MainLevel extends Phaser.Scene{
         this.candidate5 = this.add.sprite(-20, 0, 'candidate5').setScale(0.8).setOrigin(0,0).setAlpha(0);
 
         this.candidates = [this.candidate1,this.candidate2,this.candidate3,this.candidate4,this.candidate5];
+
+        this.candidate1.setFrame('neutral (1)');
+        this.candidate2.setFrame('neutral (1)');
+        this.candidate3.setFrame('neutral (1)');
+        this.candidate4.setFrame('neutral (1)');
+        this.candidate5.setFrame('neutral (1)');
+
+        //loading dots animation and sprite
+        this.anims.create({
+            key: 'neutralTalk1',
+            frames: this.anims.generateFrameNames('candidate1', {
+                prefix: 'neutral (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'neutralTalk2',
+            frames: this.anims.generateFrameNames('candidate2', {
+                prefix: 'neutral (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'neutralTalk3',
+            frames: this.anims.generateFrameNames('candidate3', {
+                prefix: 'neutral (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'neutralTalk4',
+            frames: this.anims.generateFrameNames('candidate4', {
+                prefix: 'neutral (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'neutralTalk5',
+            frames: this.anims.generateFrameNames('candidate5', {
+                prefix: 'neutral (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
         
         //loading dots animation and sprite
         this.anims.create({
@@ -299,7 +362,11 @@ class MainLevel extends Phaser.Scene{
                     }
                     this.candidate4.setAlpha(1);
                 }
-
+                this.candidate1.setFrame('neutral (1)');
+                this.candidate2.setFrame('neutral (1)');
+                this.candidate3.setFrame('neutral (1)');
+                this.candidate4.setFrame('neutral (1)');
+                this.candidate5.setFrame('neutral (1)');
             }
 
             if(this.questionsLeft>=0){
@@ -342,6 +409,42 @@ class MainLevel extends Phaser.Scene{
         await asyncPromise;
         
         this.loadingAnim.anims.stop('load');
+    }
+
+    async displayResponse(inputString){
+        var textContent = this.textResponse.text;
+        var newText = '';
+        var displayText = '';
+        newText = "\n\n" + newText;
+        this.textResponse.setText(newText);
+        //scroll out the response
+        for(var i=0; i<inputString.length; i++){
+            newText = newText + inputString[i];
+            displayText = newText + textContent;
+            //chat GPT slight delay in for loop
+            await new Promise(resolve => setTimeout(resolve, 50));
+            this.textResponse.setText(displayText);
+        }
+    }
+
+    //aycnc + await management from chat gpt 
+    async respondWithSpeach(inputString) {
+        const asyncPromise = this.displayResponse(inputString);
+        
+        var visibleCandidate;
+        var visibleCandidateNumber;
+        // Run something concurrently with the async function
+        for(var i=0; i<this.candidates.length; i++){
+            if(this.candidates[i].alpha == 1){
+                visibleCandidate = this.candidates[i];
+                visibleCandidateNumber = i+1;
+                this.candidates[i].anims.play('neutralTalk' + visibleCandidateNumber);
+            }
+        }
+
+        await asyncPromise;
+        
+        visibleCandidate.anims.stop('neutralTalk' + visibleCandidateNumber);
     }
 
     async playerInputtedString(inputString) {
@@ -464,9 +567,8 @@ class MainLevel extends Phaser.Scene{
             } 
         }
 
-        var textContent = this.textResponse.text
-        this.textResponse.setText(partsString + "\n\n" + textContent);
-
+        console.log('got to this.respondWithSpeech');
+        await this.respondWithSpeach(partsString);
     }
 }
 
