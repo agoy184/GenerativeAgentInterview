@@ -251,7 +251,7 @@ class MainLevel extends Phaser.Scene{
         // PERSON 1, Jake a charitable guy, Olympic gold metalist, with a record of being fired 55 times and highway robbery
 
         this.jake_CoreMemory = {
-            "Jake is a tiny bit arrogant and confident." : 100,
+            "Jake is a arrogant and confident." : 100,
             "Jake donated both of his kidneys.": 100,
             "Jake is a Olympic gold medalist.": 80,
             "Jake has been fired 55 times.": 80,
@@ -319,7 +319,7 @@ class MainLevel extends Phaser.Scene{
         // Set up Input
         this.topPrompt = this.add.text(410, 50, 'Enter your question:', { fontFamily: 'header', fontSize: '25px', fill: '#ffffff' });
 
-        this.startQuestions = 2; //5;
+        this.startQuestions = 5; //5;
         this.questionsLeft = this.startQuestions;
         // Set up Input
         this.questionsLeftText = this.add.text(30, 570, this.questionsLeft + ' Q\'s left', { fontFamily: 'header', fontSize: '36px', fill: '#000' }).setOrigin(0,0);
@@ -569,7 +569,7 @@ class MainLevel extends Phaser.Scene{
         }
 
         this.loadingAnim.anims.stop('load');
-        
+
         console.log('got to this.respondWithSpeech');
         await this.respondWithSpeach(partsString);
     }
