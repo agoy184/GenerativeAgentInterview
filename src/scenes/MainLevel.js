@@ -154,6 +154,11 @@ class MainLevel extends Phaser.Scene{
         this.add.image(0,0, 'bottomUI_left').setDepth(-1).setOrigin(0,0);
         this.add.image(0,0, 'topUI').setDepth(10).setOrigin(0,0);
 
+
+        //adding Zoom UI layers
+        this.add.image(15,48, 'topZoom').setDepth(10).setOrigin(0,0).setScale(0.3625);
+        this.add.image(15,425, 'bottomZoom').setDepth(10).setOrigin(0,0).setScale(0.3625);
+
         // Add interviewee NPC sprite
         this.candidate1 = this.add.sprite(-200, -50, 'candidate1').setScale(.7).setOrigin(0,0).setAlpha(1).setDepth(-2); //Jake
         this.candidate2 = this.add.sprite(-200, -50, 'candidate2').setScale(0.8).setOrigin(0,0).setAlpha(0).setDepth(-2);
@@ -162,6 +167,69 @@ class MainLevel extends Phaser.Scene{
         this.candidate5 = this.add.sprite(-200, -50, 'candidate5').setScale(0.8).setOrigin(0,0).setAlpha(0).setDepth(-2);
 
         this.candidates = [this.candidate1,this.candidate2,this.candidate3,this.candidate4,this.candidate5];
+
+        this.candidate1.setFrame('neutral (1)');
+        this.candidate2.setFrame('neutral (1)');
+        this.candidate3.setFrame('neutral (1)');
+        this.candidate4.setFrame('neutral (1)');
+        this.candidate5.setFrame('neutral (1)');
+
+        //loading dots animation and sprite
+        this.anims.create({
+            key: 'neutralTalk1',
+            frames: this.anims.generateFrameNames('candidate1', {
+                prefix: 'neutral (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'neutralTalk2',
+            frames: this.anims.generateFrameNames('candidate2', {
+                prefix: 'neutral (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'neutralTalk3',
+            frames: this.anims.generateFrameNames('candidate3', {
+                prefix: 'neutral (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'neutralTalk4',
+            frames: this.anims.generateFrameNames('candidate4', {
+                prefix: 'neutral (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'neutralTalk5',
+            frames: this.anims.generateFrameNames('candidate5', {
+                prefix: 'neutral (',
+                start: 1,
+                end: 2,
+                suffix: ')'
+            }),
+            frameRate: 4,
+            repeat: -1
+        });
         
         //loading dots animation and sprite
         this.anims.create({
@@ -184,7 +252,7 @@ class MainLevel extends Phaser.Scene{
         // PERSON 1, Jake a charitable guy, Olympic gold metalist, with a record of being fired 55 times and highway robbery
 
         this.jake_CoreMemory = {
-            "Jake is a tiny bit arrogant and confident." : 100,
+            "Jake is a arrogant and confident." : 100,
             "Jake donated both of his kidneys.": 100,
             "Jake is a Olympic gold medalist.": 80,
             "Jake has been fired 55 times.": 80,
@@ -252,7 +320,7 @@ class MainLevel extends Phaser.Scene{
         // Set up Input
         this.topPrompt = this.add.text(410, 50, 'Enter your question:', { fontFamily: 'header', fontSize: '25px', fill: '#ffffff' });
 
-        this.startQuestions = 2; //5;
+        this.startQuestions = 5; //5;
         this.questionsLeft = this.startQuestions;
         // Set up Input
         this.questionsLeftText = this.add.text(30, 570, this.questionsLeft + ' Q\'s left', { fontFamily: 'header', fontSize: '36px', fill: '#000' }).setOrigin(0,0);
@@ -268,6 +336,7 @@ class MainLevel extends Phaser.Scene{
             if(event.keyCode === 38){
                 this.currentNPC += 1
                 if(this.currentNPC>2){
+                    this.scene.start('resultsScene');  
                     this.currentNPC = 0
                 }
                 this.textResponse.setText('');
@@ -295,7 +364,11 @@ class MainLevel extends Phaser.Scene{
                     }
                     this.candidate4.setAlpha(1);
                 }
-
+                this.candidate1.setFrame('neutral (1)');
+                this.candidate2.setFrame('neutral (1)');
+                this.candidate3.setFrame('neutral (1)');
+                this.candidate4.setFrame('neutral (1)');
+                this.candidate5.setFrame('neutral (1)');
             }
 
             if(this.questionsLeft>=0){
@@ -337,7 +410,43 @@ class MainLevel extends Phaser.Scene{
         
         await asyncPromise;
         
-        this.loadingAnim.anims.stop('load');
+        // this.loadingAnim.anims.stop('load');
+    }
+
+    async displayResponse(inputString){
+        var textContent = this.textResponse.text;
+        var newText = '';
+        var displayText = '';
+        newText = "\n\n" + newText;
+        this.textResponse.setText(newText);
+        //scroll out the response
+        for(var i=0; i<inputString.length; i++){
+            newText = newText + inputString[i];
+            displayText = newText + textContent;
+            //chat GPT slight delay in for loop
+            await new Promise(resolve => setTimeout(resolve, 50));
+            this.textResponse.setText(displayText);
+        }
+    }
+
+    //aycnc + await management from chat gpt 
+    async respondWithSpeach(inputString) {
+        const asyncPromise = this.displayResponse(inputString);
+        
+        var visibleCandidate;
+        var visibleCandidateNumber;
+        // Run something concurrently with the async function
+        for(var i=0; i<this.candidates.length; i++){
+            if(this.candidates[i].alpha == 1){
+                visibleCandidate = this.candidates[i];
+                visibleCandidateNumber = i+1;
+                this.candidates[i].anims.play('neutralTalk' + visibleCandidateNumber);
+            }
+        }
+
+        await asyncPromise;
+        
+        visibleCandidate.anims.stop('neutralTalk' + visibleCandidateNumber);
     }
 
     async playerInputtedString(inputString) {
@@ -460,9 +569,10 @@ class MainLevel extends Phaser.Scene{
             } 
         }
 
-        var textContent = this.textResponse.text
-        this.textResponse.setText(partsString + "\n\n" + textContent);
+        this.loadingAnim.anims.stop('load');
 
+        console.log('got to this.respondWithSpeech');
+        await this.respondWithSpeach(partsString);
     }
 }
 
