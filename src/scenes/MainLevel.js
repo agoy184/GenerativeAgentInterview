@@ -569,9 +569,10 @@ class MainLevel extends Phaser.Scene{
         }
 
         this.loadingAnim.anims.stop('load');
-
+        
         console.log('got to this.respondWithSpeech');
         await this.respondWithSpeach(partsString);
+        console.log(response_from_NPC);
     }
 }
 
