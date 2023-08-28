@@ -160,7 +160,7 @@ class MainLevel extends Phaser.Scene{
         this.add.image(15,425, 'bottomZoom').setDepth(10).setOrigin(0,0).setScale(0.3625);
 
         // Add interviewee NPC sprite
-        this.candidate1 = this.add.sprite(-200, -50, 'candidate1').setScale(.7).setOrigin(0,0).setAlpha(1).setDepth(-2); //Jake
+        this.candidate1 = this.add.sprite(-200, -50, 'candidate1').setScale(0.7).setOrigin(0,0).setAlpha(1).setDepth(-2); //Jake
         this.candidate2 = this.add.sprite(-200, -50, 'candidate2').setScale(0.8).setOrigin(0,0).setAlpha(0).setDepth(-2);
         this.candidate3 = this.add.sprite(-350, -50, 'candidate3').setScale(2).setOrigin(0,0).setAlpha(0).setDepth(-2); //Clinton
         this.candidate4 = this.add.sprite(-200, -50, 'candidate4').setScale(0.7).setOrigin(0,0).setAlpha(0).setDepth(-2); //Linda
@@ -649,6 +649,7 @@ class MainLevel extends Phaser.Scene{
             console.log('FOUND!', emotionResponse);
         }
 
+        console.log(emotionResponse);
         this.emotionSpeech = emotionResponse;
     }
 
