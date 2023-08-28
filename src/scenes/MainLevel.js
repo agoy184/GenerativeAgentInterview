@@ -150,7 +150,8 @@ class MainLevel extends Phaser.Scene{
 
     create() {
         //adding UI layers
-        this.add.image(0,0, 'bottomUI').setDepth(0).setOrigin(0,0);
+        this.add.image(0,0, 'bottomUI').setDepth(-3).setOrigin(0,0);
+        this.add.image(0,0, 'bottomUI_left').setDepth(-1).setOrigin(0,0);
         this.add.image(0,0, 'topUI').setDepth(10).setOrigin(0,0);
 
 
@@ -159,11 +160,11 @@ class MainLevel extends Phaser.Scene{
         this.add.image(15,425, 'bottomZoom').setDepth(10).setOrigin(0,0).setScale(0.3625);
 
         // Add interviewee NPC sprite
-        this.candidate1 = this.add.sprite(-20, 0, 'candidate1').setScale(0.4).setOrigin(0,0).setAlpha(1); //Jake
-        this.candidate2 = this.add.sprite(-20, 0, 'candidate2').setScale(0.8).setOrigin(0,0).setAlpha(0);
-        this.candidate3 = this.add.sprite(-20, 0, 'candidate3').setScale(0.8).setOrigin(0,0).setAlpha(0); //Clinton
-        this.candidate4 = this.add.sprite(-20, 0, 'candidate4').setScale(0.4).setOrigin(0,0).setAlpha(0); //Linda
-        this.candidate5 = this.add.sprite(-20, 0, 'candidate5').setScale(0.8).setOrigin(0,0).setAlpha(0);
+        this.candidate1 = this.add.sprite(-200, -50, 'candidate1').setScale(.7).setOrigin(0,0).setAlpha(1).setDepth(-2); //Jake
+        this.candidate2 = this.add.sprite(-200, -50, 'candidate2').setScale(0.8).setOrigin(0,0).setAlpha(0).setDepth(-2);
+        this.candidate3 = this.add.sprite(-350, -50, 'candidate3').setScale(2).setOrigin(0,0).setAlpha(0).setDepth(-2); //Clinton
+        this.candidate4 = this.add.sprite(-200, -50, 'candidate4').setScale(0.7).setOrigin(0,0).setAlpha(0).setDepth(-2); //Linda
+        this.candidate5 = this.add.sprite(-200, -50, 'candidate5').setScale(0.8).setOrigin(0,0).setAlpha(0).setDepth(-2);
 
         this.candidates = [this.candidate1,this.candidate2,this.candidate3,this.candidate4,this.candidate5];
 

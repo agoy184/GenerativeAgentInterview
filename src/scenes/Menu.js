@@ -4,10 +4,14 @@ class Menu extends Phaser.Scene{
     }
 
     create() {
+
+        this.add.image(0,0, 'UI_start').setDepth(0).setOrigin(0,0);
+
+
         let menuConfig = {
             fontFamily: 'font1',
             fontSize: '48px',
-            backgroundColor: '#303030',
+            //backgroundColor: '#3360b0',
             color: '#FFFFFF',
             align: 'right',
             padding: {
@@ -19,7 +23,7 @@ class Menu extends Phaser.Scene{
         let smallConfig = {
             fontFamily: 'font1',
             fontSize: '24px',
-            backgroundColor: '#303030',
+            //backgroundColor: '#3360b0',
             color: '#FFFFFF',
             align: 'left',
             padding: {
@@ -32,8 +36,8 @@ class Menu extends Phaser.Scene{
         // menu text
         this.add.text(game.config.width/2, game.config.height/6, 'Generative AI Agents Interview', menuConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2, 'Press SPACE to start', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/5, game.config.height/1.15, 'Press D for credits', smallConfig).setOrigin(0.5);
-        this.add.text(game.config.width/1.25, game.config.height/1.15, 'Press A for controls', smallConfig).setOrigin(0.5);
+        //this.add.text(game.config.width/5, game.config.height/1.15, 'Press D for credits', smallConfig).setOrigin(0.5);
+        //this.add.text(game.config.width/1.25, game.config.height/1.15, 'Press A for controls', smallConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/1.05, 'Abel Goy, Jonah Ryan, Dylan Louie, Michael Mannik', smallConfig).setOrigin(0.5);
 
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -51,16 +55,16 @@ class Menu extends Phaser.Scene{
             this.scene.start("mainSceneGame");    
         }
 
-        if (Phaser.Input.Keyboard.JustDown(keyD)) {
+        //if (Phaser.Input.Keyboard.JustDown(keyD)) {
             // Credits mode
-            this.sound.play('sfx_select');
-            this.scene.start("creditsMusicScene");    
-        }
+            //this.sound.play('sfx_select');
+           // this.scene.start("creditsMusicScene");    
+       // }
 
-        if (Phaser.Input.Keyboard.JustDown(keyA)) {
+        //if (Phaser.Input.Keyboard.JustDown(keyA)) {
            // Control mode
-           this.sound.play('sfx_select');
-           this.scene.start("controlsScene");    
-       }
+           //this.sound.play('sfx_select');
+           //this.scene.start("controlsScene");    
+      // }
     }
 }
