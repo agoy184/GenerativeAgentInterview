@@ -51,14 +51,14 @@ class MainLevel extends Phaser.Scene{
             //In should be player input and key is the memory 
             let text= `on a scale of 1 to 100 rate how connected these two phrases are with only a number: "${In}" and "${key}"`
 
-            console.log(text)
+            // console.log(text)
 
             // put text through GBT
             // if function is updated with memory then hopefully we should be able to leave it empty
             let response = await this.callChatGBT(text)
             
             //output response to console
-            console.log(response)
+            // console.log(response)
             
             //check if response is a number
             if (!this.isInteger(response)) {
