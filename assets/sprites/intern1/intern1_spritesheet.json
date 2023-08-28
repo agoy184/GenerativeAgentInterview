@@ -1,0 +1,183 @@
+{
+	"frames": [
+		{
+			"filename": "intern1.png",
+			"frame": {
+				"x": 1,
+				"y": 1,
+				"w": 1100,
+				"h": 1100
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1100,
+				"h": 1100
+			},
+			"sourceSize": {
+				"w": 1100,
+				"h": 1100
+			}
+		},
+		{
+			"filename": "intern1Happy.png",
+			"frame": {
+				"x": 1103,
+				"y": 1,
+				"w": 1100,
+				"h": 1100
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1100,
+				"h": 1100
+			},
+			"sourceSize": {
+				"w": 1100,
+				"h": 1100
+			}
+		},
+		{
+			"filename": "intern1HappyTalk.png",
+			"frame": {
+				"x": 1,
+				"y": 1103,
+				"w": 1100,
+				"h": 1100
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1100,
+				"h": 1100
+			},
+			"sourceSize": {
+				"w": 1100,
+				"h": 1100
+			}
+		},
+		{
+			"filename": "intern1Sad.png",
+			"frame": {
+				"x": 1103,
+				"y": 1103,
+				"w": 1100,
+				"h": 1100
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1100,
+				"h": 1100
+			},
+			"sourceSize": {
+				"w": 1100,
+				"h": 1100
+			}
+		},
+		{
+			"filename": "intern1SadTalk.png",
+			"frame": {
+				"x": 2205,
+				"y": 1,
+				"w": 1100,
+				"h": 1100
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1100,
+				"h": 1100
+			},
+			"sourceSize": {
+				"w": 1100,
+				"h": 1100
+			}
+		},
+		{
+			"filename": "intern1Shock.png",
+			"frame": {
+				"x": 2205,
+				"y": 1103,
+				"w": 1100,
+				"h": 1100
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1100,
+				"h": 1100
+			},
+			"sourceSize": {
+				"w": 1100,
+				"h": 1100
+			}
+		},
+		{
+			"filename": "intern1ShockTalk.png",
+			"frame": {
+				"x": 1,
+				"y": 2205,
+				"w": 1100,
+				"h": 1100
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1100,
+				"h": 1100
+			},
+			"sourceSize": {
+				"w": 1100,
+				"h": 1100
+			}
+		},
+		{
+			"filename": "intern1Talk.png",
+			"frame": {
+				"x": 1103,
+				"y": 2205,
+				"w": 1100,
+				"h": 1100
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 1100,
+				"h": 1100
+			},
+			"sourceSize": {
+				"w": 1100,
+				"h": 1100
+			}
+		}
+	],
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "spritesheet.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 3306,
+			"h": 3306
+		},
+		"scale": "1"
+	}
+}
