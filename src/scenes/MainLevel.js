@@ -15,7 +15,7 @@ class MainLevel extends Phaser.Scene{
                 "Authorization": `Bearer ${apiKey}`,
             },
             body: JSON.stringify({
-                model: "gpt-3.5-turbo",
+                model: "gpt-3.5-turbo", // gpt-3.5-turbo
                 messages: [{"role": "user", "content": message}],
                 temperature: 0.5,
                 max_tokens: 512,
@@ -437,19 +437,19 @@ class MainLevel extends Phaser.Scene{
         //     "Jake's mom thinks he isn't going to make it as a car thief.": 80
         // }
         this.jake_CoreMemory = {
-            "Jake is a tiny bit arrogant and confident." : 100,
-            "Jake donated both of his kidneys.": 100,
-            "Jake used to work as a garbage boy at Safeway": 90,
-            "Jake can only cook Quesadillas and French Toast.": 80,
-            "Jake can't jump that good and is sad about it.": 80,
-            "Jake was part of the cooking club in high school.": 80,
-            "Jake is a high school student in Santa Cruz.": 70,
-            "Jake has been fired twice.": 70,
-            "Jake takes short bathroom breaks, but he peed his pants one time from going too fast.": 60,
-            "Jake burns his food often, and his mother says he’s proud of him": 50,
-            "Jake has a 3.6 GPA.": 50, 
-            "Jake does track at his high school.": 40,
-            "Jake can't drive.": 20
+            "Jake likes dogs":   4,
+            "Jake worked at the cat cafe": 4,
+            "Jake has a freight licence":  6,
+            "Jake is a olympic gold medalist":  9,
+            "Jake burned a few houses down":  2,
+            "Jake really likes megazord":  9,
+            "Jake cant drive":  3,
+            "Jake thinks hes super cool":  8,
+            "Jake was a major part of watergate":  6,
+            "Jake voted for himself in the last election":  8,
+            "Jake cant read":  5,
+            "Jake cant jump that good":  3,
+            "Jake eats cats":   5
         }
 
 
@@ -505,17 +505,17 @@ class MainLevel extends Phaser.Scene{
         }
 
         // Set up Input
-        this.topPrompt = this.add.text(410, 50, 'Enter your question:', { fontFamily: 'header', fontSize: '25px', fill: '#ffffff' });
+        this.topPrompt = this.add.text(410, 50, 'Enter your question:', { fontFamily: 'header', fontSize: '28px', fill: '#ffffff' });
 
         this.startQuestions = 5; //5;
         this.questionsLeft = this.startQuestions;
         // Set up Input
-        this.questionsLeftText = this.add.text(30, 570, this.questionsLeft + ' Q\'s left', { fontFamily: 'header', fontSize: '36px', fill: '#000' }).setOrigin(0,0);
+        this.questionsLeftText = this.add.text(30, 570, this.questionsLeft + ' Q\'s left', { fontFamily: 'header', fontSize: '35px', fill: '#000' }).setOrigin(0,0);
 
-        const textEntry = this.add.text(410, 80, '', { fontFamily: 'type', fontSize: '15px',  fill: '#ffff00' });
+        const textEntry = this.add.text(410, 80, '', { fontFamily: 'type', fontSize: '24px',  fill: '#ffff00', wordWrap: { width: 400, useAdvancedWrap: true }});
         
         const monospacedFont = 'Courier New';
-        this.textResponse = this.add.text(410, 140, '', { fontFamily: monospacedFont, fontSize: '12px', fill: '#ffffff' });
+        this.textResponse = this.add.text(410, 140, '', { fontFamily: monospacedFont, fontSize: '18px', fill: '#ffffff', wordWrap: { width: 400, useAdvancedWrap: true }});
 
         this.input.keyboard.on('keydown', async event =>
         {
@@ -714,7 +714,7 @@ class MainLevel extends Phaser.Scene{
 
         // Limits to answer
         input_prompt += `Please respond as if you were ${npc_name}. Be brief in response, under 4 sentences.\n\
-            Use casual language and don't be too descriptive.`
+            Use casual language and don't be too descriptive. Be confident but a little arrogant.`
 
         var response_from_NPC = await this.callChatGBT(input_prompt)
     
