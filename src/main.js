@@ -1,6 +1,6 @@
 let config = {
     type: Phaser.AUTO,
-    width: 896,
+    width: 900,
     height: 640,
     backgroundColor: '#8C8C8C',
     pixelArt: true,
