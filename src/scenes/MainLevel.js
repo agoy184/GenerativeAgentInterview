@@ -227,7 +227,7 @@ class MainLevel extends Phaser.Scene{
         }
 
         // Set up Input
-        this.add.text(10, 10, 'Enter your question:', { fontFamily: 'header', fontSize: '36px', fill: '#ffffff' });
+        this.topPrompt = this.add.text(10, 10, 'Enter your question:', { fontFamily: 'header', fontSize: '36px', fill: '#ffffff' });
 
         this.startQuestions = 5;
         this.questionsLeft = this.startQuestions;
@@ -247,35 +247,38 @@ class MainLevel extends Phaser.Scene{
                 if(this.currentNPC>2){
                     this.currentNPC = 0
                 }
+                this.textResponse.setText('');
+                textEntry.setText('');
+                this.questionsLeft = this.startQuestions;
+                this.questionsLeftText.setText(this.questionsLeft + ' Q\'s left');
+                this.topPrompt.setText('Enter your question:');
                 console.log("New NPC is: "+ this.npcNames[this.currentNPC]);
             }
 
-            if (textEntry.text.substr(textEntry.text.length - 1,textEntry.text.length) === "?" &&  event.keyCode === 13){
-                await this.run(textEntry.text)
-                textEntry.text = "";
-                this.questionsLeft-=1;
-                this.questionsLeftText.setText(this.questionsLeft + ' Q\'s left');
-                if (this.questionsLeft <= 0){
-                    this.currentNPC += 1
-                    this.textResponse.setText('');
-                    this.questionsLeft = this.startQuestions;
+            if(this.questionsLeft>=0){
+                if (textEntry.text.substr(textEntry.text.length - 1,textEntry.text.length) === "?" &&  event.keyCode === 13){
+                    await this.run(textEntry.text)
+                    textEntry.text = "";
+                    this.questionsLeft-=1;
                     this.questionsLeftText.setText(this.questionsLeft + ' Q\'s left');
-                    if(this.currentNPC>2){
-                        this.currentNPC = 0
+                    if (this.questionsLeft == 0){
+                        this.topPrompt.setText('Say Thanks+Goodbye:');
                     }
-                    console.log("New NPC is: "+ this.npcNames[this.currentNPC]);
-                }    
+                    if (this.questionsLeft < 0){
+                        textEntry.setText('Click the Up Arrow to Move to the Next Candidate')
+                        this.questionsLeftText.setText(0 + ' Q\'s left');
+                    }    
+                }
+                else if (event.keyCode === 8 && textEntry.text.length > 0)
+                {
+                    textEntry.text = textEntry.text.substr(0, textEntry.text.length - 1);
+                }
+                else if (textEntry.text.substr(textEntry.text.length - 1,textEntry.text.length) != "?" && 
+                    (event.keyCode === 32 || event.keyCode === 191 || (event.keyCode >= 48 && event.keyCode < 90)))
+                {
+                    textEntry.text += event.key;
+                }
             }
-            else if (event.keyCode === 8 && textEntry.text.length > 0)
-            {
-                textEntry.text = textEntry.text.substr(0, textEntry.text.length - 1);
-            }
-            else if (textEntry.text.substr(textEntry.text.length - 1,textEntry.text.length) != "?" && 
-                (event.keyCode === 32 || event.keyCode === 191 || (event.keyCode >= 48 && event.keyCode < 90)))
-            {
-                textEntry.text += event.key;
-            }
-
         });
 
 
