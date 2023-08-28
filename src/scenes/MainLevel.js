@@ -163,7 +163,7 @@ class MainLevel extends Phaser.Scene{
         this.candidate1 = this.add.sprite(-200, -50, 'candidate1').setScale(0.7).setOrigin(0,0).setAlpha(1).setDepth(-2); //Jake
         this.candidate2 = this.add.sprite(-200, -50, 'candidate2').setScale(0.8).setOrigin(0,0).setAlpha(0).setDepth(-2);
         this.candidate3 = this.add.sprite(-350, -50, 'candidate3').setScale(2).setOrigin(0,0).setAlpha(0).setDepth(-2); //Clinton
-        this.candidate4 = this.add.sprite(-200, -50, 'candidate4').setScale(0.7).setOrigin(0,0).setAlpha(0).setDepth(-2); //Linda
+        this.candidate4 = this.add.sprite(-200, -50, 'candidate4').setScale(1.45).setOrigin(0,0).setAlpha(0).setDepth(-2); //Linda
         this.candidate5 = this.add.sprite(-200, -50, 'candidate5').setScale(0.8).setOrigin(0,0).setAlpha(0).setDepth(-2);
 
         this.candidates = [this.candidate1,this.candidate2,this.candidate3,this.candidate4,this.candidate5];
