@@ -140,15 +140,16 @@ class MainLevel extends Phaser.Scene{
     }
 
     create() {
+        //adding UI layers
+        this.add.image(0,0, 'bottomUI').setDepth(0).setOrigin(0,0);
+        this.add.image(0,0, 'topUI').setDepth(10).setOrigin(0,0);
+
         // Add interviewee NPC sprite
-
-        this.candidate1 = this.add.sprite(960, 640, 'candidate1').setScale(0.3).setOrigin(1,1);
-        this.candidate2 = this.add.sprite(960, 640, 'candidate2').setScale(0.4).setOrigin(1,1);
-        this.candidate3 = this.add.sprite(960, 640, 'candidate3').setScale(0.4).setOrigin(1,1);
-        this.candidate4 = this.add.sprite(960, 640, 'candidate4').setScale(0.4).setOrigin(1,1);
-        this.candidate5 = this.add.sprite(970, 650, 'candidate5').setScale(0.7).setOrigin(1,1);
-
-
+        this.candidate1 = this.add.sprite(-20, 0, 'candidate1').setScale(0.4).setOrigin(0,0); //Jake
+        // this.candidate2 = this.add.sprite(960, 640, 'candidate2').setScale(0.4).setOrigin(1,1);
+        this.candidate3 = this.add.sprite(-20, 0, 'candidate3').setScale(0.8).setOrigin(0,0); //Clinton
+        this.candidate4 = this.add.sprite(-20, 0, 'candidate4').setScale(0.4).setOrigin(0,0); //Linda
+        // this.candidate5 = this.add.sprite(970, 650, 'candidate5').setScale(0.7).setOrigin(1,1);
         
         //loading dots animation and sprite
         this.anims.create({
@@ -163,7 +164,7 @@ class MainLevel extends Phaser.Scene{
             repeat: -1
         });
 
-        this.loadingAnim = this.add.sprite(10,100,'loadingDots').setOrigin(0,0).setScale(0.5);
+        this.loadingAnim = this.add.sprite(30,500,'loadingDots').setOrigin(0,0).setScale(0.5);
 
         this.npcNames = ["Jake","Clinton","Linda"]
         this.currentNPC = 0
@@ -237,17 +238,17 @@ class MainLevel extends Phaser.Scene{
         }
 
         // Set up Input
-        this.topPrompt = this.add.text(10, 10, 'Enter your question:', { fontFamily: 'header', fontSize: '36px', fill: '#ffffff' });
+        this.topPrompt = this.add.text(410, 50, 'Enter your question:', { fontFamily: 'header', fontSize: '25px', fill: '#ffffff' });
 
         this.startQuestions = 11; //5;
         this.questionsLeft = this.startQuestions;
         // Set up Input
-        this.questionsLeftText = this.add.text(850, 5, this.questionsLeft + ' Q\'s left', { fontFamily: 'header', fontSize: '36px', fill: '#000' }).setOrigin(1,0);
+        this.questionsLeftText = this.add.text(30, 570, this.questionsLeft + ' Q\'s left', { fontFamily: 'header', fontSize: '36px', fill: '#000' }).setOrigin(0,0);
 
-        const textEntry = this.add.text(10, 50, '', { fontFamily: 'type', fontSize: '36px',  fill: '#ffff00' });
+        const textEntry = this.add.text(410, 80, '', { fontFamily: 'type', fontSize: '23px',  fill: '#ffff00' });
         
-        const monospacedFont = 'Monaco';
-        this.textResponse = this.add.text(10, 200, '', { fontFamily: monospacedFont, fontSize: '16px', fill: '#ffffff' });
+        const monospacedFont = 'Courier New';
+        this.textResponse = this.add.text(410, 140, '', { fontFamily: monospacedFont, fontSize: '12px', fill: '#ffffff' });
 
         this.input.keyboard.on('keydown', async event =>
         {
@@ -415,7 +416,7 @@ class MainLevel extends Phaser.Scene{
             if(this.currentNPC == 2){  this.linda_pQ.enqueue(newMemory, importancePriorityNumber);}
         }
 
-        var cutOff = 140;
+        var cutOff = 63;
         var counter = 0;
         var partsString = '';
         for(var i=0; i<response_from_NPC.length; i++){

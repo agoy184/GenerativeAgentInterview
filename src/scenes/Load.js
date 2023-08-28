@@ -73,6 +73,9 @@ class Load extends Phaser.Scene {
         // this.load.image('intern5Shock', 'sprites/intern5/intern5Shock.png')
         // this.load.image('intern5ShockTalk', 'sprites/intern5/intern5ShockTalk.png')
 
+        this.load.image('topUI','UI_toplayer.png');
+        this.load.image('bottomUI','UI_bottomlayer.png');
+
         this.load.atlas('candidate1', 'sprites/intern1/candidate1.png', 'sprites/intern1/candidate1.json');
         this.load.atlas('candidate2', 'sprites/intern2/candidate2.png', 'sprites/intern2/candidate2.json');
         this.load.atlas('candidate3', 'sprites/intern3/candidate3.png', 'sprites/intern3/candidate3.json');
