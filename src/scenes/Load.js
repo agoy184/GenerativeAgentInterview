@@ -73,9 +73,18 @@ class Load extends Phaser.Scene {
         // this.load.image('intern5Shock', 'sprites/intern5/intern5Shock.png')
         // this.load.image('intern5ShockTalk', 'sprites/intern5/intern5ShockTalk.png')
 
-        this.load.atlas('candidate1', 'sprites/intern1/candidate1.png', 'sprites/intern1/candidate1.json');
+        this.load.image('topUI','UI_toplayer.png');
+        this.load.image('bottomUI','UI_bottomlayer.png');
+
+        this.load.image('bottomUI_left','UI_bottomlayer_left.png');
+        this.load.image('UI_start','UI_start.png');
+
+        this.load.image('topZoom','zoomOutlineTop.png');
+        this.load.image('bottomZoom','zoomOutlineBottom.png');
+
+        this.load.atlas('candidate1', 'sprites/intern1/candidate1Try3.png', 'sprites/intern1/candidate1Try3.json');
         this.load.atlas('candidate2', 'sprites/intern2/candidate2.png', 'sprites/intern2/candidate2.json');
-        this.load.atlas('candidate3', 'sprites/intern3/candidate3.png', 'sprites/intern3/candidate3.json');
+        this.load.atlas('candidate3', 'sprites/intern3/candidate3Try2.png', 'sprites/intern3/candidate3Try2.json');
         this.load.atlas('candidate4', 'sprites/intern4/candidate4.png', 'sprites/intern4/candidate4.json');
         this.load.atlas('candidate5', 'sprites/intern5/candidate5.png', 'sprites/intern5/candidate5.json');
 

@@ -1,8 +1,8 @@
 let config = {
     type: Phaser.AUTO,
-    width: 900,
+    width: 896,
     height: 640,
-    backgroundColor: '#8C8C8C',
+    backgroundColor: '#639bff',
     pixelArt: true,
     autoCenter: true,
     physics: {
@@ -14,7 +14,7 @@ let config = {
         }
       }
     },
-    scene:  [ Load, Menu, CreditsMusic, CreditsBackground, Controls, MainLevel ]
+    scene:  [ Load, Menu, CreditsMusic, CreditsBackground, Controls, MainLevel, Results ]
 }
 
 let game = new Phaser.Game(config);
