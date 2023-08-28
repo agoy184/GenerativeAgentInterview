@@ -350,32 +350,32 @@ class MainLevel extends Phaser.Scene{
         //Putting New Memories into Memory Stream/PQ
         var question = inputString; //questionToAsk[i];
         var newMemory = "You got asked the question: " + question;
-        var importancePriority = await this.importance(newMemory);
-        console.log(typeof importancePriority)
-        if (this.isInteger(importancePriority)) {
-            var importancePriorityNumber = parseInt(importancePriority);
+        // var importancePriority = await this.importance(newMemory);
+        // console.log(typeof importancePriority)
+        // if (this.isInteger(importancePriority)) {
+        //     var importancePriorityNumber = parseInt(importancePriority);
 
-            if(this.currentNPC == 0){  this.jake_pQ.enqueue(newMemory, importancePriorityNumber); }
-            if(this.currentNPC == 1){  this.clinton_pQ.enqueue(newMemory, importancePriorityNumber);}
-            if(this.currentNPC == 2){  this.linda_pQ.enqueue(newMemory, importancePriorityNumber);}
+        //     if(this.currentNPC == 0){  this.jake_pQ.enqueue(newMemory, importancePriorityNumber); }
+        //     if(this.currentNPC == 1){  this.clinton_pQ.enqueue(newMemory, importancePriorityNumber);}
+        //     if(this.currentNPC == 2){  this.linda_pQ.enqueue(newMemory, importancePriorityNumber);}
            
-        }
-        else{
-            var tryAgain = "I only wanted you to respond with one number from 1 to 100 rating the importance of the memory: \"" +
-            newMemory +
-            "\". Try again.";
-            while(!this.isInteger(importancePriority)){
-                console.log("Try Again");
-                console.log(importancePriority);
-                importancePriority = await this.importance(tryAgain);
-            }
-            if(this.currentNPC == 0){  this.jake_pQ.enqueue(newMemory, importancePriorityNumber); }
-            if(this.currentNPC == 1){  this.clinton_pQ.enqueue(newMemory, importancePriorityNumber);}
-            if(this.currentNPC == 2){  this.linda_pQ.enqueue(newMemory, importancePriorityNumber);}
-            // console.log(importancePriority);
-            // console.log("ERROR: CHATGPT No Longer Prompts the same way");
-            // throw new Error("ERROR: CHATGPT No Longer Prompts the same way");
-        }
+        // }
+        // else{
+        //     var tryAgain = "I only wanted you to respond with one number from 1 to 100 rating the importance of the memory: \"" +
+        //     newMemory +
+        //     "\". Try again.";
+        //     while(!this.isInteger(importancePriority)){
+        //         console.log("Try Again");
+        //         console.log(importancePriority);
+        //         importancePriority = await this.importance(tryAgain);
+        //     }
+        //     if(this.currentNPC == 0){  this.jake_pQ.enqueue(newMemory, importancePriorityNumber); }
+        //     if(this.currentNPC == 1){  this.clinton_pQ.enqueue(newMemory, importancePriorityNumber);}
+        //     if(this.currentNPC == 2){  this.linda_pQ.enqueue(newMemory, importancePriorityNumber);}
+        //     // console.log(importancePriority);
+        //     // console.log("ERROR: CHATGPT No Longer Prompts the same way");
+        //     // throw new Error("ERROR: CHATGPT No Longer Prompts the same way");
+        // }
         
         //Putting New Memories into Memory Stream/PQ
         var response = response_from_NPC; //questionToAsk[i];
