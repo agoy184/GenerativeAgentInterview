@@ -51,15 +51,33 @@ class MainLevel extends Phaser.Scene{
             //In should be player input and key is the memory 
             let text= `on a scale of 1 to 100 rate how connected these two phrases are with only a number: "${In}" and "${key}"`
 
-
             console.log(text)
 
             // put text through GBT
             // if function is updated with memory then hopefully we should be able to leave it empty
             let response = await this.callChatGBT(text)
             
-
+            //output response to console
             console.log(response)
+            
+            //check if response is a number
+            if (!this.isInteger(response)) {
+                var tryAgain = "I only wanted you to respond only a whole number without additional words are symbols. On a scale of 1 to 100 how connected two phrases are: " +
+                "\"" +
+                In + 
+                "\"" +
+                " and " +
+                "\"" +
+                key + 
+                "\". Try again.";
+                while(!this.isInteger(response)){
+                    console.log(tryAgain);
+                    console.log("Try Again");
+                    console.log(response);
+                    response = await this.callChatGBT(tryAgain);
+                }
+                console.log('FOUND!', response);
+            }
 
             // get numbers from string
             let NumbersFromString=0
@@ -68,13 +86,8 @@ class MainLevel extends Phaser.Scene{
             //console.log(NumbersFromString)
 
             //find the relevance number 
-            let rel = NumbersFromString
-
-            
+            let rel = NumbersFromString            
             //console.log(rel)
-
-
-
             // get to total retrieval. simple way by just adding them.
             let retrieval = rel + mem[i].prority 
 
@@ -93,7 +106,6 @@ class MainLevel extends Phaser.Scene{
                 }
 
             }
-
             else{
                 //add to new dic with new number
                 dic[key]=retrieval
@@ -101,12 +113,9 @@ class MainLevel extends Phaser.Scene{
             }
         }
         //array of top 10 memories
-
         // return x amount of relevant mem
-
         console.log(Object.keys(dic))
-        return Object.keys(dic)
-        
+        return Object.keys(dic)   
     }
 
     //Importance
@@ -242,12 +251,12 @@ class MainLevel extends Phaser.Scene{
         // Set up Input
         this.topPrompt = this.add.text(410, 50, 'Enter your question:', { fontFamily: 'header', fontSize: '25px', fill: '#ffffff' });
 
-        this.startQuestions = 11; //5;
+        this.startQuestions = 2; //5;
         this.questionsLeft = this.startQuestions;
         // Set up Input
         this.questionsLeftText = this.add.text(30, 570, this.questionsLeft + ' Q\'s left', { fontFamily: 'header', fontSize: '36px', fill: '#000' }).setOrigin(0,0);
 
-        const textEntry = this.add.text(410, 80, '', { fontFamily: 'type', fontSize: '23px',  fill: '#ffff00' });
+        const textEntry = this.add.text(410, 80, '', { fontFamily: 'type', fontSize: '15px',  fill: '#ffff00' });
         
         const monospacedFont = 'Courier New';
         this.textResponse = this.add.text(410, 140, '', { fontFamily: monospacedFont, fontSize: '12px', fill: '#ffffff' });
@@ -268,22 +277,22 @@ class MainLevel extends Phaser.Scene{
                 console.log("New NPC is: "+ this.npcNames[this.currentNPC]);
 
                 if(this.currentNPC == 0){
-                    for(i=0; i<this.candidates.length; i++){
+                    for(var i=0; i<this.candidates.length; i++){
                         this.candidates[i].setAlpha(0);
                     }
                     this.candidate1.setAlpha(1);
                 }
                 if(this.currentNPC == 1){
-                    for(i=0; i<this.candidates.length; i++){
+                    for(var i=0; i<this.candidates.length; i++){
                         this.candidates[i].setAlpha(0);
                     }
                     this.candidate3.setAlpha(1);
                 }
                 if(this.currentNPC == 2){
-                    for(i=0; i<this.candidates.length; i++){
+                    for(var i=0; i<this.candidates.length; i++){
                         this.candidates[i].setAlpha(0);
                     }
-                    this.candidate3.setAlpha(1);
+                    this.candidate4.setAlpha(1);
                 }
 
             }
