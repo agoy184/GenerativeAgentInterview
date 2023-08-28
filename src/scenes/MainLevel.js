@@ -350,6 +350,9 @@ class MainLevel extends Phaser.Scene{
         //Putting New Memories into Memory Stream/PQ
         var question = inputString; //questionToAsk[i];
         var newMemory = "You got asked the question: " + question;
+
+        //experimenting with taking out having just the question as a memory
+
         // var importancePriority = await this.importance(newMemory);
         // console.log(typeof importancePriority)
         // if (this.isInteger(importancePriority)) {
